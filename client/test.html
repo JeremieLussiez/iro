@@ -9,10 +9,11 @@
 </head>
 <body>
 
-<input id="urlInput" type="text" value="http://192.168.1.116">
+<input id="urlInput" type="text" value="http://192.168.0.25">
 
-<a href="#" onclick="testRingColor()">Test ring mode</a>
-<a href="#" onclick="testConnectionColor()">Test connection mode</a>
+<a href="#" onclick="testRingMode()">Test ring mode</a>
+<a href="#" onclick="testGaugeMode()">Test gauge mode</a>
+<a href="#" onclick="testConnectionMode()">Test connection mode</a>
 
 <script>
 
@@ -44,18 +45,30 @@
         return document.getElementById("urlInput").value;
     };
 
-    testRingColor = () => {
+    testRingMode = () => {
         const url = getURL();
         const request = new XMLHttpRequest();
         const red = colors[colorIndex][0];
         const green = colors[colorIndex][1];
         const blue = colors[colorIndex][2];
-        request.open("GET", `${url}/ring?color=r${red}g${green}b${blue}`);
+        request.open("GET", `${url}/ring?foreground=r${red}g${green}b${blue}`);
         request.send(null);
         colorIndex = (colorIndex + 1) % colors.length;
     };
 
-    testConnectionColor = () => {
+    testGaugeMode = () => {
+        const url = getURL();
+        const request = new XMLHttpRequest();
+        const red = colors[colorIndex][0];
+        const green = colors[colorIndex][1];
+        const blue = colors[colorIndex][2];
+        const value = Math.round(Math.random() * 23);
+        request.open("GET", `${url}/gauge?foreground=r${red}g${green}b${blue}&background=r${blue}g${red}b${green}&value=${value}`);
+        request.send(null);
+        colorIndex = (colorIndex + 1) % colors.length;
+    };
+
+    testConnectionMode = () => {
         const url = getURL();
         const request = new XMLHttpRequest();
         request.open("GET", `${url}/`);
