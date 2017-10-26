@@ -12,8 +12,8 @@
 #include "./gaugeIroMode.h"
 #include "./smileyIroMode.h"
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "***";
+const char* password = "***";
 
 ESP8266WebServer server(80);
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIXELS_PIN, NEO_GRB + NEO_KHZ800);
@@ -35,7 +35,6 @@ String getContentType(String filename) {
 uint8_t chunk[1024];
 bool fileLoaderToggle = false;
 bool handleFileRead(String path) {
-  iroModesManager->switchOffAllModes();
   fileLoaderToggle = !fileLoaderToggle;
   Serial.println("handleFileRead: " + path);
   if (path.endsWith("/")) path += "index.html";
@@ -47,27 +46,33 @@ bool handleFileRead(String path) {
     File file = SPIFFS.open(path, "r");
     int fileSize = file.size();
     int fileSlice = fileSize / NUMPIXELS;
+    int lastProgressBarIndex = -1;
+    int currentProgressBarIndex = 0;
     while (fileSize > 0) {
       size_t chunkLength = std::min((int)(sizeof(chunk) - 1), fileSize);
       file.read((uint8_t *)chunk, chunkLength);
       server.client().write((const char*)chunk, chunkLength);
       fileSize -= chunkLength;
-      for (int i = 0; i < NUMPIXELS - (fileSize / fileSlice) - 1; i++) {
-        if (fileLoaderToggle) {
-          pixels.setPixelColor(i, pixels.Color(0, 0, 20));
-        } else {
-          pixels.setPixelColor(i, pixels.Color(20, 5, 0));
+      currentProgressBarIndex = NUMPIXELS - (fileSize / fileSlice);
+      if (currentProgressBarIndex != lastProgressBarIndex) {
+        lastProgressBarIndex = currentProgressBarIndex;
+        for (int i = 0; i < currentProgressBarIndex - 1; i++) {
+          if (fileLoaderToggle) {
+            pixels.setPixelColor(i, pixels.Color(0, 0, 20));
+          } else {
+            pixels.setPixelColor(i, pixels.Color(20, 5, 0));
+          }
         }
+        for (int i = NUMPIXELS - (fileSize / fileSlice); i < NUMPIXELS; i++) {
+          pixels.setPixelColor(i, pixels.Color(0, 0, 0));
+        }
+        pixels.show();
       }
-      for (int i = NUMPIXELS - (fileSize / fileSlice); i < NUMPIXELS; i++) {
-        pixels.setPixelColor(i, pixels.Color(0, 0, 0));
-      }
-      if (fileLoaderToggle) {
-        pixels.setPixelColor(NUMPIXELS - 1, pixels.Color(0, 0, 20));
-      } else {
-        pixels.setPixelColor(NUMPIXELS - 1, pixels.Color(20, 5, 0));
-      }
-      pixels.show();
+    }
+    if (fileLoaderToggle) {
+      pixels.setPixelColor(NUMPIXELS - 1, pixels.Color(0, 0, 20));
+    } else {
+      pixels.setPixelColor(NUMPIXELS - 1, pixels.Color(20, 5, 0));
     }
     pixels.show();
     file.close();
@@ -141,6 +146,10 @@ void setup(void) {
   }
   pixels.show();
 
+  WiFi.softAPdisconnect();
+  WiFi.disconnect();
+  WiFi.mode(WIFI_STA);
+  delay(200);
   Serial.begin(115200);
   WiFi.begin(ssid, password);
   Serial.println("");
@@ -172,6 +181,10 @@ void setup(void) {
   }
 
   if (wifiStatus == WL_CONNECTED) {
+    WiFi.softAPdisconnect();
+    WiFi.disconnect();
+    WiFi.mode(WIFI_STA);
+    delay(200);
     Serial.println("Connection successful");
     Serial.println("");
     Serial.print("Connected to ");
@@ -180,6 +193,10 @@ void setup(void) {
     Serial.println(WiFi.localIP());
     showIp();
   } else {
+    WiFi.softAPdisconnect();
+    WiFi.disconnect();
+    WiFi.mode(WIFI_AP);
+    delay(200);
     Serial.println("Configuration mode on 192.168.1.1");
     iroModesManager->switchToMode(setupIroMode);
     IPAddress configurationIp(192, 168, 1, 1);

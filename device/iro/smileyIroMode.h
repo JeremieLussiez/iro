@@ -10,6 +10,7 @@ class SmileyIroMode: public IroMode {
     Color currentBackgroundColor = {.r = 0, .g = 0, .b = 0};
     Color targetForegroundColor = {.r = 0, .g = 0, .b = 0};
     Color targetBackgroundColor = {.r = 0, .g = 0, .b = 0};
+    int loopDelay = 0;
   public:
     SmileyIroMode(IroModesManager *manager);
     void animate(Adafruit_NeoPixel *pixels);

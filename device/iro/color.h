@@ -12,6 +12,7 @@ typedef struct Color {
 Color lerpColor(Color current, Color target);
 
 bool checkColor(Color);
+bool areSameColor(Color current, Color target);
 
 #endif
 

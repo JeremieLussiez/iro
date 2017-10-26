@@ -19,8 +19,8 @@ import en from "./labels/en";
 
 import configuration from "./configuration";
 
-let eventRouterInstance = new EventRouter();
-let translatorInstance = new Translator();
+const eventRouterInstance = new EventRouter();
+const translatorInstance = new Translator();
 translatorInstance.addLanguageLabels(fr, en);
 Vue.filter("translate", label => translatorInstance.getTranslatedLabel(label));
 
@@ -40,7 +40,7 @@ Vue.material.registerTheme("default", {
     background: "white"
 });
 
-let routes = [];
+const routes = [];
 
 routes.push(LoginScreenComponent.routes);
 routes.push(OverviewComponent.routes);
@@ -52,7 +52,7 @@ const router = new VueRouter({
 
 Vue.router = router;
 
-let app = new Vue({
+const app = new Vue({
     router,
     el: "#iro-app"
 });
