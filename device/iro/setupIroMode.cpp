@@ -22,8 +22,9 @@ SetupIroMode::SetupIroMode(IroModesManager *manager) {
   this->server = manager->server;
   this->manager->registerMode(this);
   this->server->on("/setup", [&]() {
+    this->server->sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+    this->server->sendHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     this->manager->switchToMode(this);
-    Serial.println("Switched to [SETUP] mode");
     this->server->send(200, "application/json", String("{}"));
   });
 }

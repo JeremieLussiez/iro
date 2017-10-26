@@ -1,0 +1,4 @@
+<md-snackbar md-position="bottom center" ref="messageHolder" md-duration="3000">
+    <span>{{message}}</span>
+    <md-button class="md-accent" @click.native="$refs.messageHolder.close()"></md-button>
+</md-snackbar>

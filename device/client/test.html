@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>IRO Test</title>
     <style>
-
     </style>
 </head>
 <body>
@@ -13,7 +12,10 @@
 
 <a href="#" onclick="testRingMode()">Test ring mode</a>
 <a href="#" onclick="testGaugeMode()">Test gauge mode</a>
+<a href="#" onclick="testSmileyMode()">Test smiley mode</a>
 <a href="#" onclick="testConnectionMode()">Test connection mode</a>
+
+
 
 <script>
 
@@ -64,6 +66,17 @@
         const blue = colors[colorIndex][2];
         const value = Math.round(Math.random() * 23);
         request.open("GET", `${url}/gauge?foreground=r${red}g${green}b${blue}&background=r${blue}g${red}b${green}&value=${value}`);
+        request.send(null);
+        colorIndex = (colorIndex + 1) % colors.length;
+    };
+
+    testSmileyMode = () => {
+        const url = getURL();
+        const request = new XMLHttpRequest();
+        const red = colors[colorIndex][0];
+        const green = colors[colorIndex][1];
+        const blue = colors[colorIndex][2];
+        request.open("GET", `${url}/smiley?foreground=r${red}g${green}b${blue}&background=r${blue}g${red}b${green}`);
         request.send(null);
         colorIndex = (colorIndex + 1) % colors.length;
     };

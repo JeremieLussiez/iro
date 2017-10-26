@@ -5,8 +5,8 @@ void RingIroMode::animate(Adafruit_NeoPixel *pixels) {
   this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor);
   for (int i = 0; i < NUMPIXELS; i++) {
     pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-    pixels->show();
   }
+  pixels->show();
 }
 
 RingIroMode::RingIroMode(IroModesManager *manager) {
@@ -14,6 +14,8 @@ RingIroMode::RingIroMode(IroModesManager *manager) {
   this->server = manager->server;
   this->manager->registerMode(this);
   this->server->on("/ring", [&]() {
+    this->server->sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+    this->server->sendHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     Color fc = {.r = 0, .g = 0, .b = 0};
     int value = 0;
     int canChangeMode = this->server->args() == 1 &&
