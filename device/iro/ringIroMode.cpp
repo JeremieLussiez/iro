@@ -2,11 +2,17 @@
 #include "./iroModesManager.h"
 
 void RingIroMode::animate(Adafruit_NeoPixel *pixels) {
-  this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor);
-  for (int i = 0; i < NUMPIXELS; i++) {
-    pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
+  if (this->loopDelay > LOOP_DELAY / 10) {
+    this->loopDelay = 0;
+    if (!(areSameColor(this->currentForegroundColor, this->targetForegroundColor))) {
+      this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor);
+      for (int i = 0; i < NUMPIXELS; i++) {
+        pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
+      }
+      pixels->show();
+    }
   }
-  pixels->show();
+  this->loopDelay++;
 }
 
 RingIroMode::RingIroMode(IroModesManager *manager) {
@@ -27,8 +33,10 @@ RingIroMode::RingIroMode(IroModesManager *manager) {
       this->targetForegroundColor = fc;
       String response = String("{foreground: {r:") + fc.r + ",g:" + fc.g + ",b:" + fc.b + "}}";
       this->server->send(200, "application/json", response);
+      return;
     } else {
       this->server->send(400, "application/json", String("{error: \"wrong parameters\", expected:\"r0-255g0-255b0-255\", received:\"") + this->server->arg(0) + "\", decoded:\"r:" + fc.r + ",g:" + fc.g + ",b:" + fc.b + "\"}");
+      return;
     }
   });
 }

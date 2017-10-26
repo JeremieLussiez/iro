@@ -2,29 +2,30 @@
 #include "./iroModesManager.h"
 
 void SmileyIroMode::animate(Adafruit_NeoPixel *pixels) {
-  this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor);
-  this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor);
+  if (!(areSameColor(this->currentForegroundColor, this->targetForegroundColor) && areSameColor(this->currentBackgroundColor, this->targetBackgroundColor))) {
+    this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor);
+    this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor);
 
-  for (int i = 0; i <= 1; i++) {
-    pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
+    for (int i = 0; i <= 1; i++) {
+      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
+      pixels->show();
+    }
+    pixels->setPixelColor(2, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
+    for (int i = 3; i <= 8; i++) {
+      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
+    }
+    pixels->setPixelColor(9, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
+    for (int i = 10; i <= 13; i++) {
+      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
+    }
+    for (int i = 14; i <= 21; i++) {
+      pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
+    }
+    for (int i = 22; i <= 23; i++) {
+      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
+    }
     pixels->show();
   }
-  pixels->setPixelColor(2, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-  for (int i = 3; i <= 8; i++) {
-    pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
-  }
-  pixels->setPixelColor(9, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-  for (int i = 10; i <= 13; i++) {
-    pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
-  }
-  for (int i = 14; i <= 21; i++) {
-    pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-  }
-  for (int i = 22; i <= 23; i++) {
-    pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
-  }
-
-  pixels->show();
 }
 
 SmileyIroMode::SmileyIroMode(IroModesManager *manager) {
@@ -51,8 +52,10 @@ SmileyIroMode::SmileyIroMode(IroModesManager *manager) {
       this->targetBackgroundColor = bc;
       String response = String("{foreground: {r:") + fc.r + ",g:" + fc.g + ",b:" + fc.b + "}, background: {r:" + bc.r + ",g:" + bc.g + ",b:" + bc.b + "}}";
       this->server->send(200, "application/json", response);
+      return;
     } else {
       this->server->send(400, "application/json", String("{error: \"wrong parameters\", expected:\"r0-255g0-255b0-255\", received:\"") + this->server->arg(0) + "\", decoded:\"r:" + fc.r + ",g:" + fc.g + ",b:" + fc.b + "\"}");
+      return;
     }
   });
 }

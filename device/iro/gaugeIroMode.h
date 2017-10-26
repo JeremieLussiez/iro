@@ -12,6 +12,7 @@ class GaugeIroMode: public IroMode {
     Color targetBackgroundColor = {.r = 0, .g = 0, .b = 0};
     int currentValue = 0;
     int targetValue = 0;
+    int loopDelay = 0;
   public:
     GaugeIroMode(IroModesManager *manager);
     void animate(Adafruit_NeoPixel *pixels);
