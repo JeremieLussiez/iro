@@ -18,6 +18,7 @@ class IroModesManager {
     
     IroModesManager(ESP8266WebServer *server, Adafruit_NeoPixel *pixels);
     void animateModes();
+    void switchOffAllModes();
     void registerMode(IroMode *iroMode);
     void switchToMode(IroMode *iroMode);
 };

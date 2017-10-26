@@ -2,7 +2,7 @@
 #include "./iroModesManager.h"
 
 bool checkValue(int value) {
-  return value >= 0 && value < NUMPIXELS;
+  return value >= 0 && value <= NUMPIXELS;
 }
 
 void GaugeIroMode::animate(Adafruit_NeoPixel *pixels) {
@@ -10,17 +10,16 @@ void GaugeIroMode::animate(Adafruit_NeoPixel *pixels) {
   this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor);
   this->currentValue = lerp(this->currentValue, this->targetValue);
   if (this->currentValue > 0) {
-    for (int i = 0; i <= this->currentValue; i++) {
+    for (int i = 0; i < this->currentValue; i++) {
       pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-      pixels->show();
     }
+  } else {
+    pixels->setPixelColor(0, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
   }
-  if (this->currentValue < NUMPIXELS - 1) {
-    for (int i = currentValue; i < NUMPIXELS; i++) {
-      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
-      pixels->show();
-    }
+  for (int i = this->currentValue + 1; i < NUMPIXELS; i++) {
+    pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
   }
+  pixels->show();
 }
 
 GaugeIroMode::GaugeIroMode(IroModesManager *manager) {
@@ -29,6 +28,8 @@ GaugeIroMode::GaugeIroMode(IroModesManager *manager) {
   this->manager->registerMode(this);
   ESP8266WebServer *server = manager->server;
   this->server->on("/gauge", [&]() {
+    this->server->sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+    this->server->sendHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     Color fc = {.r = 0, .g = 0, .b = 0};
     Color bc = {.r = 0, .g = 0, .b = 0};
     int value = 0;
@@ -46,7 +47,7 @@ GaugeIroMode::GaugeIroMode(IroModesManager *manager) {
     if (canChangeMode) {
       this->manager->switchToMode(this);
       this->targetForegroundColor = fc;
-      this->currentBackgroundColor = bc;
+      this->targetBackgroundColor = bc;
       this->targetValue = value;
       String response = String("{foreground: {r:") + fc.r + ",g:" + fc.g + ",b:" + fc.b + "}, background: {r:" + bc.r + ",g:" + bc.g + ",b:" + bc.b + "}}";
       this->server->send(200, "application/json", response);
