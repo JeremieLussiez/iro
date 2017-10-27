@@ -11,6 +11,7 @@
 #include "./ringIroMode.h"
 #include "./gaugeIroMode.h"
 #include "./smileyIroMode.h"
+#include "./waveIroMode.h"
 
 const char* ssid = "***";
 const char* password = "***";
@@ -23,6 +24,7 @@ RingIroMode *ringMode = new RingIroMode(iroModesManager);
 GaugeIroMode *gaugeIroMode = new GaugeIroMode(iroModesManager);
 SetupIroMode *setupIroMode = new SetupIroMode(iroModesManager);
 SmileyIroMode *smileyIroMode = new SmileyIroMode(iroModesManager);
+WaveIroMode *waveIroMode = new WaveIroMode(iroModesManager);
 
 String getContentType(String filename) {
   if (filename.endsWith(".html")) return "text/html";
@@ -181,10 +183,6 @@ void setup(void) {
   }
 
   if (wifiStatus == WL_CONNECTED) {
-    WiFi.softAPdisconnect();
-    WiFi.disconnect();
-    WiFi.mode(WIFI_STA);
-    delay(200);
     Serial.println("Connection successful");
     Serial.println("");
     Serial.print("Connected to ");

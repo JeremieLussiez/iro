@@ -10,6 +10,21 @@
             <md-layout>
 
                 <md-layout md-gutter md-flex="100">
+                    <md-button @click.native="displayRing()" class="md-raised md-accent">
+                        __test.display.ring__
+                    </md-button>
+                    <md-button @click.native="displayGauge()" class="md-raised md-accent">
+                        __test.display.gauge__
+                    </md-button>
+                    <md-button @click.native="displaySmiley()" class="md-raised md-accent">
+                        __test.display.smiley__
+                    </md-button>
+                    <md-button @click.native="displayWave()" class="md-raised md-accent">
+                        __test.display.wave__
+                    </md-button>
+                </md-layout>
+
+                <md-layout md-gutter md-flex="100">
                     <md-input-container>
                         <label for="selectedAccessPoint">__login.screen.accessPoints__</label>
                         <md-select name="selectedAccessPoint" id="selectedAccessPoint" v-model="selectedAccessPoint">

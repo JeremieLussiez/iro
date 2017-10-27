@@ -1,39 +1,47 @@
-#include "./smileyIroMode.h"
+#include "./waveIroMode.h"
 #include "./iroModesManager.h"
 
-void SmileyIroMode::animate(Adafruit_NeoPixel *pixels) {
-  if (!(areSameColor(this->currentForegroundColor, this->targetForegroundColor) && areSameColor(this->currentBackgroundColor, this->targetBackgroundColor))) {
+void WaveIroMode::animate(Adafruit_NeoPixel *pixels) {
+  if (this->loopDelay > LOOP_DELAY / 3) {
+    this->loopDelay = 0;
     this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor);
     this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor);
-
-    for (int i = 0; i <= 1; i++) {
-      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
-      pixels->show();
-    }
-    pixels->setPixelColor(2, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-    for (int i = 3; i <= 8; i++) {
+    for (int i = 0; i < NUMPIXELS; i++) {
       pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
     }
-    pixels->setPixelColor(9, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-    for (int i = 10; i <= 13; i++) {
-      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
-    }
-    for (int i = 14; i <= 21; i++) {
-      pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-    }
-    for (int i = 22; i <= 23; i++) {
-      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
+    pixels->setPixelColor(this->waveIndex, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
+    Color trail = lerpColor(this->currentForegroundColor, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+    pixels->setPixelColor((this->waveIndex - 1) % NUMPIXELS, pixels->Color(trail.r, trail.g, trail.b));
+    for (int i = 2; i < 8; i++) {
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      trail = lerpColor(trail, this->currentBackgroundColor);
+      pixels->setPixelColor((this->waveIndex - i) % NUMPIXELS, pixels->Color(trail.r, trail.g, trail.b));
     }
     pixels->show();
+    this->waveIndex++;
   }
+  this->loopDelay++;
 }
 
-SmileyIroMode::SmileyIroMode(IroModesManager *manager) {
+WaveIroMode::WaveIroMode(IroModesManager *manager) {
   this->manager = manager;
   this->server = manager->server;
   this->manager->registerMode(this);
   ESP8266WebServer *server = manager->server;
-  this->server->on("/api/smiley", [&]() {
+  this->server->on("/api/wave", [&]() {
     this->server->sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
     this->server->sendHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     Color fc = {.r = 0, .g = 0, .b = 0};

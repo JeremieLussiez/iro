@@ -19,7 +19,7 @@ RingIroMode::RingIroMode(IroModesManager *manager) {
   this->manager = manager;
   this->server = manager->server;
   this->manager->registerMode(this);
-  this->server->on("/ring", [&]() {
+  this->server->on("/api/ring", [&]() {
     this->server->sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
     this->server->sendHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     Color fc = {.r = 0, .g = 0, .b = 0};

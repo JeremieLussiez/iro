@@ -33,7 +33,7 @@ GaugeIroMode::GaugeIroMode(IroModesManager *manager) {
   this->server = manager->server;
   this->manager->registerMode(this);
   ESP8266WebServer *server = manager->server;
-  this->server->on("/gauge", [&]() {
+  this->server->on("/api/gauge", [&]() {
     this->server->sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
     this->server->sendHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     Color fc = {.r = 0, .g = 0, .b = 0};

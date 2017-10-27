@@ -2,6 +2,7 @@ import moment from "moment";
 import Vue from "vue/dist/vue.common.js";
 import VueResource from "vue-resource";
 import VueRouter from "vue-router";
+import store from "./store"
 import VueMaterial from "vue-material";
 import "vue-material/dist/vue-material.css";
 import "./components/login/interceptors";
@@ -53,6 +54,10 @@ const router = new VueRouter({
 Vue.router = router;
 
 const app = new Vue({
+    created: function () {
+        window.Vue = this
+    },
     router,
-    el: "#iro-app"
+    el: "#iro-app",
+    store
 });
