@@ -26,6 +26,7 @@ void IroModesManager::switchToMode(IroMode *iroMode) {
   this->switchOffAllModes();
   iroMode->isRunning = true;
   Serial.println("Run new mode");
+  delay(100);
 }
 
 void IroModesManager::animateModes() {
