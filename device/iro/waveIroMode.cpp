@@ -19,7 +19,7 @@ void WaveIroMode::animate(Adafruit_NeoPixel *pixels) {
       trail = lerpColor(trail, this->currentBackgroundColor);
       trail = lerpColor(trail, this->currentBackgroundColor);
     pixels->setPixelColor((this->waveIndex - 1) % NUMPIXELS, pixels->Color(trail.r, trail.g, trail.b));
-    for (int i = 2; i < NUMPIXELS; i++) {
+    for (int i = 2; i <= NUMPIXELS; i++) {
       trail = lerpColor(trail, this->currentBackgroundColor);
       trail = lerpColor(trail, this->currentBackgroundColor);
       trail = lerpColor(trail, this->currentBackgroundColor);
