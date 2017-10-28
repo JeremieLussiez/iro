@@ -12,5 +12,6 @@ class RingIroMode: public IroMode {
   public:
     RingIroMode(IroModesManager *manager);
     void animate(Adafruit_NeoPixel *pixels);
+    void handleRoute();
 };
 

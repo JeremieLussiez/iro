@@ -13,6 +13,7 @@ class IroMode {
   public:
     bool isRunning = false;
     virtual void animate(Adafruit_NeoPixel *pixels) = 0;
+    virtual void handleRoute() = 0;
 };
 
 #endif

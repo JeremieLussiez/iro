@@ -15,5 +15,6 @@ class WaveIroMode: public IroMode {
   public:
     WaveIroMode(IroModesManager *manager);
     void animate(Adafruit_NeoPixel *pixels);
+    void handleRoute();
 };
 

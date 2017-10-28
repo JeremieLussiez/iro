@@ -18,16 +18,20 @@ void SetupIroMode::animate(Adafruit_NeoPixel *pixels) {
   this->loopDelay++;
 }
 
+void SetupIroMode::handleRoute() {
+  this->server->sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+  this->server->sendHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  this->manager->switchToMode(this);
+  this->server->send(200, "application/json", String("{}"));
+  return;
+}
+
 SetupIroMode::SetupIroMode(IroModesManager *manager) {
   this->manager = manager;
   this->server = manager->server;
   this->manager->registerMode(this);
-  this->server->on("/setup", [&]() {
-    this->server->sendHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
-    this->server->sendHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    this->manager->switchToMode(this);
-    this->server->send(200, "application/json", String("{}"));
-    return;
+  this->server->on("/setup", [this]() {
+    this->handleRoute();
   });
 }
 
