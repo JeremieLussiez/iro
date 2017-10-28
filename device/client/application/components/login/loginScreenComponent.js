@@ -3,6 +3,7 @@ import "./loginScreenComponent.css";
 import template from "./loginScreenComponent.html";
 import Translator from "../../translate/translator";
 import LoginService from "./loginService";
+
 import fr from "./labels/fr";
 import en from "./labels/en";
 

@@ -29,6 +29,7 @@ WaveIroMode *waveIroMode = new WaveIroMode(iroModesManager);
 String getContentType(String filename) {
   if (filename.endsWith(".html")) return "text/html";
   else if (filename.endsWith(".css")) return "text/css";
+  else if (filename.endsWith(".svg")) return "image/svg+xml";
   else if (filename.endsWith(".js")) return "application/javascript";
   else if (filename.endsWith(".ico")) return "image/x-icon";
   return "text/plain";
