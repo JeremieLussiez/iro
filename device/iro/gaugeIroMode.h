@@ -16,5 +16,6 @@ class GaugeIroMode: public IroMode {
   public:
     GaugeIroMode(IroModesManager *manager);
     void animate(Adafruit_NeoPixel *pixels);
+    void handleRoute();
 };
 

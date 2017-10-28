@@ -14,5 +14,6 @@ class SmileyIroMode: public IroMode {
   public:
     SmileyIroMode(IroModesManager *manager);
     void animate(Adafruit_NeoPixel *pixels);
+    void handleRoute();
 };
 

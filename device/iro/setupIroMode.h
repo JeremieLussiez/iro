@@ -10,5 +10,6 @@ class SetupIroMode: public IroMode {
   public:
     SetupIroMode(IroModesManager *manager);
     void animate(Adafruit_NeoPixel *pixels);
+    void handleRoute();
 };
 
