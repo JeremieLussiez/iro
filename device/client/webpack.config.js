@@ -27,7 +27,7 @@ module.exports = {
     },
 
     devServer: {
-        contentBase: "./",
+        contentBase: "../iro/data",
         inline: true
     },
 
