@@ -3,8 +3,8 @@
 
 void SmileyIroMode::animate(Adafruit_NeoPixel *pixels) {
   if (!(areSameColor(this->currentForegroundColor, this->targetForegroundColor) && areSameColor(this->currentBackgroundColor, this->targetBackgroundColor))) {
-    this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor);
-    this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor);
+    this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor, 1);
+    this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor, 1);
 
     for (int i = 0; i <= 1; i++) {
       pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));

@@ -9,9 +9,9 @@ void GaugeIroMode::animate(Adafruit_NeoPixel *pixels) {
   if (this->loopDelay > LOOP_DELAY / 3) {
     this->loopDelay = 0;
     if (!(areSameColor(this->currentForegroundColor, this->targetForegroundColor) && areSameColor(this->currentBackgroundColor, this->targetBackgroundColor) && this->currentValue == this->targetValue)) {
-      this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor);
-      this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor);
-      this->currentValue = lerp(this->currentValue, this->targetValue);
+      this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor, 1);
+      this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor, 1);
+      this->currentValue = lerp(this->currentValue, this->targetValue, 1);
       if (this->currentValue > 0) {
         for (int i = 0; i < this->currentValue; i++) {
           pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));

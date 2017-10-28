@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: url("/assets/login-background.jpg");
+  /*background: url("/assets/login-background.jpg");*/
 }
 
 .login-box {

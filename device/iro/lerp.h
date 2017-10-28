@@ -1,2 +1,2 @@
-int lerp(int current, int target);
+int lerp(int current, int target, int lerpSpeed);
 

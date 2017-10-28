@@ -2,7 +2,8 @@
 
     <md-card class="login-box" md-with-hover>
         <md-card-header>
-            <h3 style="color: gray;" class="display-1"><img width="40" height="40" src="/assets/logo.png">__login.screen.application.name__
+            <h3 style="color: gray;" class="display-1"><!--img width="40" height="40" src="/assets/logo.png"-->
+                __login.screen.application.name__
             </h3>
         </md-card-header>
 
@@ -28,7 +29,8 @@
                     <md-input-container>
                         <label for="selectedAccessPoint">__login.screen.accessPoints__</label>
                         <md-select name="selectedAccessPoint" id="selectedAccessPoint" v-model="selectedAccessPoint">
-                            <md-option v-for="accessPoint in accessPoints" :value="accessPoint">{{accessPoint}}</md-option>
+                            <md-option v-for="accessPoint in accessPoints" :value="accessPoint">{{accessPoint}}
+                            </md-option>
                         </md-select>
                     </md-input-container>
                 </md-layout>

@@ -95,11 +95,12 @@ module.exports = {
         console.log(`You are currently building the project for ${env} environment...`);
 
         const plugins = [
-            new webpack.optimize.CommonsChunkPlugin({
+            // As we can only stream one file at a time to our device, fewer files are better ^_^ !
+            /*new webpack.optimize.CommonsChunkPlugin({
                 name: "commons",
                 filename: "commons.js",
                 minChunks: 2
-            }),
+            }),*/
             new webpack.HotModuleReplacementPlugin(),
             new webpack.DefinePlugin({
                 CONFIGURATION: JSON.stringify(configurations[env]),
@@ -108,7 +109,7 @@ module.exports = {
             new StringReplacePlugin(),
             new HtmlWebPackPlugin({
                 template: "index.ejs"
-            }),
+            })
         ];
 
         if (isAnalyzing) {
