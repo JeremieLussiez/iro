@@ -1,4 +1,4 @@
-![IRO](./documentation/iro.png)
+![IRO](./documentation/logo.png)
 
 Iro is a color based IoT notification device
 
