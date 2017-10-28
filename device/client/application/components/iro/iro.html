@@ -1,0 +1,16 @@
+<md-card class="padded-card">
+    <md-card-media style="alignment: center">
+        <svg class="padded-svg" xmlns="http://www.w3.org/2000/svg" :viewBox="viewBox" width="256" height="256">
+            <circle v-for="led of leds" :cx="led.x" :cy="led.y" :r="ledRadius" :fill="led.color"></circle>
+        </svg>
+    </md-card-media>
+
+    <md-card-header>
+        <div class="md-title">{{title}}</div>
+        <div class="md-subhead">{{definition}}</div>
+    </md-card-header>
+
+    <md-card-actions>
+        <md-button class="md-raised md-accent">__iro.send__</md-button>
+    </md-card-actions>
+</md-card>

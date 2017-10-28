@@ -12,6 +12,7 @@ import EventRouter from "./event/eventRouter";
 import "./components/loading/loadingScreenComponent";
 import "./components/messagePlayer/messagePlayerComponent";
 import LoginScreenComponent from "./components/login/loginScreenComponent";
+import IroModesComponent from "./components/modes/modes";
 import OverviewComponent from "./components/overview/overviewComponent";
 
 import Translator from "./translate/translator";
@@ -45,6 +46,7 @@ const routes = [];
 
 routes.push(LoginScreenComponent.routes);
 routes.push(OverviewComponent.routes);
+routes.push(IroModesComponent.routes);
 routes.push({path: "*", redirect: "/login"});
 
 const router = new VueRouter({
