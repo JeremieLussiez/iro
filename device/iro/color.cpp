@@ -1,10 +1,10 @@
 #include "./color.h"
 
-Color lerpColor(Color current, Color target) {
+Color lerpColor(Color current, Color target, int lerpSpeed) {
   Color lerped;
-  lerped.r = lerp(current.r, target.r);
-  lerped.g = lerp(current.g, target.g);
-  lerped.b = lerp(current.b, target.b);
+  lerped.r = lerp(current.r, target.r, lerpSpeed);
+  lerped.g = lerp(current.g, target.g, lerpSpeed);
+  lerped.b = lerp(current.b, target.b, lerpSpeed);
   return lerped;
 }
 

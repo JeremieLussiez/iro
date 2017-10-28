@@ -15,17 +15,13 @@ void IroModesManager::registerMode(IroMode *iroMode) {
 
 void IroModesManager::switchOffAllModes() {
   for (int i = 0; i <= this->lastModeIndex; i++) {
-    Serial.print("Stopping mode ");
-    Serial.println(i);
     this->modes[i]->isRunning = false;
   }
 }
 
 void IroModesManager::switchToMode(IroMode *iroMode) {
-  Serial.println("Switching mode...");
   this->switchOffAllModes();
   iroMode->isRunning = true;
-  Serial.println("Run new mode");
   delay(100);
 }
 

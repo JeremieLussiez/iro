@@ -34,11 +34,10 @@ String getContentType(String filename) {
   return "text/plain";
 }
 
-uint8_t chunk[1024];
 bool fileLoaderToggle = false;
+uint8_t chunk[2 * HTTP_DOWNLOAD_UNIT_SIZE];
 bool handleFileRead(String path) {
   fileLoaderToggle = !fileLoaderToggle;
-  Serial.println("handleFileRead: " + path);
   if (path.endsWith("/")) path += "index.html";
   String contentType = getContentType(path);
   if (SPIFFS.exists(path)) {
@@ -80,7 +79,6 @@ bool handleFileRead(String path) {
     file.close();
     return true;
   }
-  Serial.println("\tFile Not Found");
   return false;
 }
 
@@ -152,9 +150,7 @@ void setup(void) {
   WiFi.disconnect();
   WiFi.mode(WIFI_STA);
   delay(200);
-  Serial.begin(115200);
   WiFi.begin(ssid, password);
-  Serial.println("");
   SPIFFS.begin();
   int wifiStatus = WiFi.status();
   while (wifiStatus != WL_CONNECTED && wifiStatus != WL_CONNECT_FAILED && wifiStatus != WL_NO_SSID_AVAIL) {
@@ -162,72 +158,42 @@ void setup(void) {
     waitingToggle();
     switch (wifiStatus) {
       case WL_CONNECTION_LOST:
-        Serial.println("Connection lost");
         break;
       case WL_DISCONNECTED:
-        Serial.println("Disconnected");
         break;
       case WL_IDLE_STATUS:
-        Serial.println("Iddling");
         break;
       case WL_CONNECT_FAILED:
-        Serial.println("Connection failed");
         break;
       case WL_NO_SSID_AVAIL:
-        Serial.println("No SSID available");
         break;
-      default:
-        Serial.println(WiFi.status());
     }
     wifiStatus = WiFi.status();
   }
 
   if (wifiStatus == WL_CONNECTED) {
-    Serial.println("Connection successful");
-    Serial.println("");
-    Serial.print("Connected to ");
-    Serial.println(ssid);
-    Serial.print("IP address: ");
-    Serial.println(WiFi.localIP());
     showIp();
+    MDNS.begin("esp8266");
   } else {
     WiFi.softAPdisconnect();
     WiFi.disconnect();
     WiFi.mode(WIFI_AP);
     delay(200);
-    Serial.println("Configuration mode on 192.168.1.1");
     iroModesManager->switchToMode(setupIroMode);
     IPAddress configurationIp(192, 168, 1, 1);
     IPAddress configurationNetworkMask(255, 255, 255, 0);
     WiFi.softAPConfig(configurationIp, configurationIp, configurationNetworkMask);
     WiFi.softAP(CONFIGURATION_AP, CONFIGURATION_PASSWORD);
-    Serial.print("AP IP address: ");
-    Serial.println(configurationIp);
-  }
-
-  if (MDNS.begin("esp8266")) {
-    Serial.println("MDNS responder started");
   }
 
   server.on("/api/networks", []() {
     int n = WiFi.scanNetworks();
-    Serial.println("scan done");
     if (n == 0) {
       server.send(200, "application/json", "[]");
     } else {
-      Serial.print(n);
-      Serial.println(" networks found");
       String apList = String("");
-      for (int i = 0; i < n; ++i)
-      {
-        // Print SSID and RSSI for each network found
-        Serial.print(i + 1);
-        Serial.print(": ");
-        Serial.print(WiFi.SSID(i));
-        Serial.print(" (");
-        Serial.print(WiFi.RSSI(i));
-        Serial.print(")");
-        Serial.println((WiFi.encryptionType(i) == ENC_TYPE_NONE) ? " " : "*");
+      for (int i = 0; i < n; ++i) {
+        // WiFi.RSSI(i)
         apList += String("\"") + String(WiFi.SSID(i)) + String("\"");
         if (i < n - 1) {
           apList += String(",");
@@ -243,7 +209,6 @@ void setup(void) {
   server.onNotFound(handleNotFound);
 
   server.begin();
-  Serial.println("HTTP server started");
 
 }
 
