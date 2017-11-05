@@ -47,7 +47,7 @@ let labels = {};
  * @private
  * @type {string}
  */
-let currentLanguageCode = window.navigator.userLanguage || window.navigator.language;
+let currentLanguageCode = "en" || window.navigator.userLanguage || window.navigator.language;
 
 let instance = null;
 
@@ -69,7 +69,7 @@ export default class Translator {
              * @private
              * @type {string}
              */
-            this.defaultLanguage = 'en'; //TGM
+            this.defaultLanguage = "en"; //TGM
 
             instance = this;
 
