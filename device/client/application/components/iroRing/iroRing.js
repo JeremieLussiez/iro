@@ -14,6 +14,9 @@ let component = Vue.component("iro-ring", {
     }),
 
     methods: {
+        ledClick(ledId) {
+            this.$emit("ledClicked", ledId);
+        },
         resetLeds(leds) {
             console.log("Hello", leds);
             this.leds = leds;
