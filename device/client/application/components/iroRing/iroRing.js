@@ -37,11 +37,12 @@ let component = Vue.component("iro-ring", {
 
     mounted() {
         const ringSize = 24;
+        const angleCorrection = -Math.PI / 2.0;
         for (let i = 0; i < ringSize; i++) {
             this.leds.push({
                 color: "#eeeeee",
-                x: Math.cos(Math.PI * 2 / ringSize * i) * this.ringRadius + this.ledRadius + this.ringRadius,
-                y: Math.sin(Math.PI * 2 / ringSize * i) * this.ringRadius + this.ledRadius + this.ringRadius
+                x: Math.cos(angleCorrection + Math.PI * 2 / ringSize * i) * this.ringRadius + this.ledRadius + this.ringRadius,
+                y: Math.sin(angleCorrection + Math.PI * 2 / ringSize * i) * this.ringRadius + this.ledRadius + this.ringRadius
             });
         }
 
