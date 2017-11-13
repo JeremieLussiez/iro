@@ -50,7 +50,7 @@
         "build:integration": "webpack --env integration",
         "build:local": "webpack --env local",
         "build:production": "webpack --optimize-minimize --env production",
-        "start": "webpack-dev-server --content-base ./client/assets/ --host 0.0.0.0 --port 7777 --inline --colors",
+        "start": "webpack-dev-server --content-base ./client/assets/ --host 0.0.0.0 --port 8080 --inline --colors",
         "test": "karma start"
     },
     "repository": {
