@@ -28,6 +28,7 @@ module.exports = {
 
     devServer: {
         contentBase: "../iro/data",
+        disableHostCheck: true,
         inline: true
     },
 
