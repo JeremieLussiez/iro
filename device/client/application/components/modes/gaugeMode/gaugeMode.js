@@ -24,7 +24,7 @@ let component = Vue.component("iro-gauge-mode", {
         translate(label) {
             return translatorInstance.getTranslatedLabel(label);
         },
-        onLedClicked(ledIndex) {
+        onLedClick(ledIndex) {
             if (ledIndex === 0) {
                 if (this.value === 1) {
                     this.value = 0;

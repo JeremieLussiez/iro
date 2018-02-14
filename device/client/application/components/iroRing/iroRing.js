@@ -14,11 +14,10 @@ let component = Vue.component("iro-ring", {
     }),
 
     methods: {
-        ledClick(ledId) {
-            this.$emit("ledClicked", ledId);
+        onLedClick(ledId) {
+            this.$emit("ledClick", ledId);
         },
         resetLeds(leds) {
-            console.log("Hello", leds);
             this.leds = leds;
             this.$forceUpdate();
         }
@@ -40,6 +39,7 @@ let component = Vue.component("iro-ring", {
         const angleCorrection = -Math.PI / 2.0;
         for (let i = 0; i < ringSize; i++) {
             this.leds.push({
+                index: i,
                 color: "#eeeeee",
                 x: Math.cos(angleCorrection + Math.PI * 2 / ringSize * i) * this.ringRadius + this.ledRadius + this.ringRadius,
                 y: Math.sin(angleCorrection + Math.PI * 2 / ringSize * i) * this.ringRadius + this.ledRadius + this.ringRadius

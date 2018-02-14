@@ -1,3 +1,3 @@
 <svg class="padded-svg" xmlns="http://www.w3.org/2000/svg" :viewBox="viewBox" width="256" height="256">
-    <circle v-for="(led,index) in leds" @click="ledClick(index)" :cx="led.x" :cy="led.y" :r="ledRadius" :fill="led.color"></circle>
+    <circle v-for="(led,index) in leds" @click="onLedClick(index)" :cx="led.x" :cy="led.y" :r="ledRadius" :fill="led.color"></circle>
 </svg>
