@@ -3,6 +3,7 @@ import "./gaugeMode.scss";
 import template from "./gaugeMode.html";
 import IroRing from "../../iroRing/iroRing";
 import Translator from "../../../translate/translator";
+import Color from "../../../tools/color";
 import fr from "./labels/fr";
 import en from "./labels/en";
 
@@ -23,15 +24,30 @@ let component = Vue.component("iro-gauge-mode", {
         translate(label) {
             return translatorInstance.getTranslatedLabel(label);
         },
+        onLedClicked(ledIndex) {
+            if (ledIndex === 0) {
+                if (this.value === 1) {
+                    this.value = 0;
+                } else if (this.value === 0) {
+                    this.value = 1;
+                } else {
+                    this.value = ledIndex;
+                }
+            } else {
+                this.value = ledIndex;
+            }
+            this.updateModeParameters();
+        },
         updateModeParameters() {
             let leds = this.$refs.ring.leds;
             for (let i = this.value; i < leds.length; i++) {
                 const led = leds[i];
                 led.color = "#eeeeee";
             }
-            for (let i = 0; i < this.value - 1; i++) {
-                const led = leds[i];
-                led.color = "#ff5722";
+            if (this.value > 0) {
+                for (let i = 0; i <= this.value; i++) {
+                    leds[i].color = Color.rgbToHTMLColor(Color.lerpColor(Color.htmlColorToRGB("#ffeb3b"), 0, Color.htmlColorToRGB("#ff5722"), leds.length, i));
+                }
             }
         },
         ringUpdate(leds) {
