@@ -1,43 +1,42 @@
-import Vue from "vue/dist/vue.common.js"
-import "./loadingScreenComponent.scss";
-import template from "./loadingScreenComponent.html";
+import Vue from 'vue/dist/vue.common';
+import './loadingScreenComponent.scss';
+import EventRouter from '../../event/eventRouter';
+import template from './loadingScreenComponent.html';
 
-import EventRouter from "../../event/eventRouter";
+const eventRouter = new EventRouter();
 
-let eventRouter = new EventRouter();
+Vue.component('loading-screen', {
+  props: [],
+  template,
 
-Vue.component("loading-screen", {
-    props: [],
-    template: template,
+  mounted() {
+    eventRouter.listen('StartLoading', this);
+    eventRouter.listen('StopLoading', this);
+  },
 
-    mounted: function () {
-        eventRouter.listen("StartLoading", this);
-        eventRouter.listen("StopLoading", this);
+  data() {
+    return {
+      isLoading: false,
+      delay: 250,
+    };
+  },
+
+  // TODO: Loading ownership
+  methods: {
+    onStartLoading() {
+      if (!this.isLoading) {
+        this.loadingDelay = setTimeout(() => {
+          this.isLoading = true;
+          this.$forceUpdate();
+        }, this.delay);
+      }
     },
-
-    data: function () {
-        return {
-            isLoading: false,
-            delay: 250
-        }
+    onStopLoading() {
+      setTimeout(() => {
+        clearTimeout(this.loadingDelay);
+        this.isLoading = false;
+        this.$forceUpdate();
+      }, this.delay);
     },
-
-    //TODO: Loading ownership
-    methods: {
-        onStartLoading() {
-            if (!this.isLoading) {
-                this.loadingDelay = window.setTimeout(() => {
-                    this.isLoading = true;
-                    this.$forceUpdate();
-                }, this.delay);
-            }
-        },
-        onStopLoading() {
-            window.setTimeout(() => {
-                window.clearTimeout(this.loadingDelay);
-                this.isLoading = false;
-                this.$forceUpdate();
-            }, this.delay);
-        }
-    }
+  },
 });

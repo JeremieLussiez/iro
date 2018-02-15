@@ -1,8 +1,14 @@
+/* eslint import/no-extraneous-dependencies: 0 */
+
+const postcssSmartImport = require('postcss-smart-import')({/* ...options */});
+const precss = require('precss')({/* ...options */});
+const autoprefixer = require('autoprefixer')({/* ...options */});
+
 module.exports = {
-    plugins: [
-        require('postcss-smart-import')({ /* ...options */ }),
-        require('precss')({ /* ...options */ }),
-        require('autoprefixer')({ /* ...options */ })
-    ]
+  plugins: [
+    postcssSmartImport,
+    precss,
+    autoprefixer,
+  ],
 };
 
