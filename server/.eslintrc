@@ -1,0 +1,27 @@
+{
+  "extends": [
+    "airbnb-base",
+    "plugin:import/errors",
+    "plugin:import/warnings"
+  ],
+  "env": {
+    "node": true,
+    "mocha": true,
+    "es6": true,
+    "browser": false
+  },
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+  "rules": {
+    "import/order": "error",
+    "no-underscore-dangle": "off",
+    "no-bitwise": "off",
+    "no-plusplus": "off",
+    "max-len": "off"
+  },
+  "globals": {
+    "window": true,
+    "sessionStorage": true
+  }
+}

@@ -1,31 +1,30 @@
-import Vue from "vue/dist/vue.common.js"
-import "./messagePlayerComponent.scss";
-import template from "./messagePlayerComponent.html";
+import Vue from 'vue/dist/vue.common';
+import './messagePlayerComponent.scss';
+import EventRouter from '../../event/eventRouter';
+import template from './messagePlayerComponent.html';
 
-import EventRouter from "../../event/eventRouter";
+const eventRouterInstance = new EventRouter();
 
-let eventRouterInstance = new EventRouter();
+export default Vue.component('message-player', {
 
-export default Vue.component("message-player", {
+  template,
 
-    template: template,
+  mounted() {
+    eventRouterInstance.listen('PlayMessage', this);
+  },
 
-    mounted: function () {
-        eventRouterInstance.listen("PlayMessage", this);
+  data() {
+    return {
+      message: '',
+    };
+  },
+
+  methods: {
+    onPlayMessage(message) {
+      this.message = message;
+      this.$refs.messageHolder.open();
     },
-
-    data() {
-        return {
-            message: ""
-        }
-    },
-
-    methods: {
-        onPlayMessage(message) {
-            this.message = message;
-            this.$refs.messageHolder.open();
-        }
-    }
+  },
 
 });
 

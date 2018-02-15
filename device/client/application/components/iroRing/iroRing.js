@@ -1,62 +1,64 @@
-import Vue from "vue/dist/vue.common.js";
-import "./iroRing.scss";
-import template from "./iroRing.html";
-import Color from "../../tools/color";
+import Vue from 'vue/dist/vue.common';
+import './iroRing.scss';
+import template from './iroRing.html';
 
-let component = Vue.component("iro-ring", {
-    template: template,
+const component = Vue.component('iro-ring', {
+  template,
 
-    data: () => ({
-        time: 0,
-        ledRadius: 10,
-        ringRadius: 80,
-        leds: []
-    }),
+  data: () => ({
+    time: 0,
+    ledRadius: 10,
+    ringRadius: 80,
+    leds: [],
+  }),
 
-    methods: {
-        onLedClick(ledId) {
-            this.$emit("ledClick", ledId);
-        },
-        resetLeds(leds) {
-            this.leds = leds;
-            this.$forceUpdate();
-        }
+  methods: {
+    onLedClick(ledId) {
+      this.$emit('ledClick', ledId);
     },
-
-    computed: {
-        viewBox() {
-            const actualRadius = (this.ringRadius + this.ledRadius) * 2;
-            return `0 0 ${actualRadius} ${actualRadius}`;
-        }
+    resetLeds(leds) {
+      this.leds = leds;
+      this.$forceUpdate();
     },
+  },
 
-    destroyed() {
-        window.clearInterval(this.timer);
+  computed: {
+    viewBox() {
+      const actualRadius = (this.ringRadius + this.ledRadius) * 2;
+      return `0 0 ${actualRadius} ${actualRadius}`;
     },
+  },
 
-    mounted() {
-        const ringSize = 24;
-        const angleCorrection = -Math.PI / 2.0;
-        for (let i = 0; i < ringSize; i++) {
-            this.leds.push({
-                index: i,
-                color: "#eeeeee",
-                x: Math.cos(angleCorrection + Math.PI * 2 / ringSize * i) * this.ringRadius + this.ledRadius + this.ringRadius,
-                y: Math.sin(angleCorrection + Math.PI * 2 / ringSize * i) * this.ringRadius + this.ledRadius + this.ringRadius
-            });
-        }
+  destroyed() {
+    window.clearInterval(this.timer);
+  },
 
-        for (let i = 0; i < this.leds.length; i++) {
-            const led = this.leds[i];
-            led.color = "#eeeeee";
-        }
-
-        this.timer = window.setInterval(() => {
-            this.$emit("ringUpdate", this.leds);
-            this.$forceUpdate();
-        }, 50);
-        this.$forceUpdate();
+  mounted() {
+    const ringSize = 24;
+    const angleCorrection = -Math.PI / 2.0;
+    const radiusOffset = this.ledRadius + this.ringRadius;
+    const radius = (Math.PI * 2) / ringSize;
+    for (let i = 0; i < ringSize; i++) {
+      const angle = angleCorrection + (radius * i);
+      this.leds.push({
+        index: i,
+        color: '#eeeeee',
+        x: (Math.cos(angle) * this.ringRadius) + radiusOffset,
+        y: (Math.sin(angle) * this.ringRadius) + radiusOffset,
+      });
     }
+
+    for (let i = 0; i < this.leds.length; i++) {
+      const led = this.leds[i];
+      led.color = '#eeeeee';
+    }
+
+    this.timer = window.setInterval(() => {
+      this.$emit('ringUpdate', this.leds);
+      this.$forceUpdate();
+    }, 50);
+    this.$forceUpdate();
+  },
 
 });
 
