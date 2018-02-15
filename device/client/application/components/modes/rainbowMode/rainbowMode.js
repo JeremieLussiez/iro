@@ -36,18 +36,12 @@ const component = Vue.component('iro-rainbow-mode', {
       const steps = leds.length / rainbow.length;
       for (let i = 0; i < rainbow.length - 1; i++) {
         for (let j = 0; j < steps; j++) {
-          const startColor = Color.htmlColorToRGB(rainbow[i]);
-          const endColor = Color.htmlColorToRGB(rainbow[i + 1]);
-          const newColor = Color.lerpColor(startColor, 0, endColor, steps, j);
-          leds[ledIndex].color = Color.rgbToHTMLColor(newColor);
+          leds[ledIndex].color = Color.rgbToHTMLColor(Color.lerpColor(Color.htmlColorToRGB(rainbow[i]), 0, Color.htmlColorToRGB(rainbow[i + 1]), steps, j));
           ledIndex++;
         }
       }
       for (let j = 0; j < steps; j++) {
-        const startColor = Color.htmlColorToRGB(rainbow[rainbow.length - 1]);
-        const endColor = Color.htmlColorToRGB(rainbow[0]);
-        const newColor = Color.lerpColor(startColor, 0, endColor, steps, j);
-        leds[ledIndex].color = newColor;
+        leds[ledIndex].color = Color.rgbToHTMLColor(Color.lerpColor(Color.htmlColorToRGB(rainbow[rainbow.length - 1]), 0, Color.htmlColorToRGB(rainbow[0]), steps, j));
         ledIndex++;
       }
     },

@@ -13,41 +13,10 @@
  You should have received a copy of the GNU Lesser General Public
  License along with this library. */
 
-/**
- * <p>
- *     Labels for all available languages
- *     {
- *      en: {
- *          language: 'English',
- *          code: 'en',
- *          labels: {
- *              'animal.cat': 'Cat',
- *              'animal.cat.praise': '__myCatName__ is an awesome cat !'
- *          }
- *      }
- *      fr: {
- *          language: 'Français',
- *          code: 'fr',
- *          labels: {
- *              'animal.cat': 'Chat'
- *              'animal.cat.praise': '__myCatName__ est un super chat !'
- *          }
- *      }
- *     }
- * </p>
- * @private
- * @type {{}}
- */
-const labels = {};
 
-/**
- * <p>
- *     Use browser set language as current language, by default.
- * </p>
- * @private
- * @type {string}
- */
-let currentLanguageCode = 'en' || window.navigator.userLanguage || window.navigator.language;
+function hasOwnProperty(obj, prop) {
+  return {}.hasOwnProperty.call(obj, prop);
+}
 
 let instance = null;
 
@@ -69,6 +38,44 @@ export default class Translator {
        */
       this.defaultLanguage = 'en'; // TGM
 
+
+      /**
+       * <p>
+       *     Use browser set language as current language, by default.
+       * </p>
+       * @private
+       * @type {string}
+       */
+      this.currentLanguageCode = 'en' || window.navigator.userLanguage || window.navigator.language;
+
+
+      /**
+       * <p>
+       *     Labels for all available languages
+       *     {
+       *      en: {
+       *          language: 'English',
+       *          code: 'en',
+       *          labels: {
+       *              'animal.cat': 'Cat',
+       *              'animal.cat.praise': '__myCatName__ is an awesome cat !'
+       *          }
+       *      }
+       *      fr: {
+       *          language: 'Français',
+       *          code: 'fr',
+       *          labels: {
+       *              'animal.cat': 'Chat'
+       *              'animal.cat.praise': '__myCatName__ est un super chat !'
+       *          }
+       *      }
+       *     }
+       * </p>
+       * @private
+       * @type {{}}
+       */
+      this.labels = {};
+
       instance = this;
     }
 
@@ -89,16 +96,16 @@ export default class Translator {
           const {
             code,
           } = language;
-          if (!labels[code]) {
-            labels[language.code] = {
+          if (!this.labels[code]) {
+            this.labels[language.code] = {
               code: language.code,
               name: language.name,
               labels: {},
             };
           }
-          const languageLabels = labels[code].labels;
-          for (const label in language.labels) {
-            if (language.labels.hasOwnProperty(label)) {
+          const languageLabels = this.labels[code].labels;
+          Object.keys(language.labels).forEach((label) => {
+            if (hasOwnProperty(language.labels, label)) {
               const labelValue = language.labels[label];
               if (labelValue.indexOf('__') >= 0) {
                 const bindings = [];
@@ -141,7 +148,7 @@ export default class Translator {
                 };
               }
             }
-          }
+          });
         }
       });
     }
@@ -155,7 +162,7 @@ export default class Translator {
    * @param languageCode as corresponding ISO code and conveniently used by browsers.
    */
   setCurrentLanguage(languageCode) {
-    currentLanguageCode = languageCode;
+    this.currentLanguageCode = languageCode;
   }
 
   /**
@@ -166,7 +173,7 @@ export default class Translator {
    * @returns {String} the currentLanguageCode
    */
   getCurrentLanguage() {
-    return currentLanguageCode;
+    return this.currentLanguageCode;
   }
 
   /**
@@ -180,15 +187,15 @@ export default class Translator {
    * @private
    */
   _runTranslation(languageCode, label, bindings) {
-    if (labels.hasOwnProperty(languageCode)) {
-      const currentLabels = labels[languageCode].labels;
-      if (currentLabels.hasOwnProperty(label)) {
+    if (hasOwnProperty(this.labels, languageCode)) {
+      const currentLabels = this.labels[languageCode].labels;
+      if (hasOwnProperty(currentLabels, label)) {
         if (currentLabels[label]) {
           if (!currentLabels[label].compiled) {
             return currentLabels[label].value;
           }
           let translated = '';
-          for (const binding of currentLabels[label].bindings) {
+          currentLabels[label].bindings.forEach((binding) => {
             if (!binding.isBinding) {
               translated += binding.value;
             } else if (bindings) {
@@ -196,7 +203,7 @@ export default class Translator {
             } else {
               translated += binding.key;
             }
-          }
+          });
           return translated;
         }
         return label;
@@ -215,7 +222,7 @@ export default class Translator {
    * @returns {*} translated label
    */
   getTranslatedLabel(label, bindings) {
-    let translated = this._runTranslation(currentLanguageCode, label, bindings);
+    let translated = this._runTranslation(this.currentLanguageCode, label, bindings);
     if (translated) {
       return translated;
     }
@@ -237,14 +244,14 @@ export default class Translator {
    */
   getLanguages() {
     const languages = [];
-    for (const language in labels) {
-      if (labels.hasOwnProperty(language)) {
+    Object.keys(this.labels).forEach((language) => {
+      if (hasOwnProperty(this.labels, language)) {
         languages.push({
-          code: labels[language].code,
-          name: labels[language].name,
+          code: this.labels[language].code,
+          name: this.labels[language].name,
         });
       }
-    }
+    });
     return languages;
   }
 }
