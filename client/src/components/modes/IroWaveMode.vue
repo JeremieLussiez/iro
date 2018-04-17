@@ -7,46 +7,49 @@
 
   export default {
 
-    name: 'iro-gauge-mode',
+    name: 'iro-wave-mode',
 
     components: {
       IroRing,
     },
 
     data: () => ({
-      value: 17,
+      gradient: {
+        start: '#2196f3',
+        end: '#eeeeee',
+      },
     }),
 
     methods: {
-      onLedClick(ledIndex) {
-        if (ledIndex === 0) {
-          if (this.value === 1) {
-            this.value = 0;
-          } else if (this.value === 0) {
-            this.value = 1;
-          } else {
-            this.value = ledIndex;
-          }
-        } else {
-          this.value = ledIndex;
-        }
-        this.updateModeParameters();
-      },
       updateModeParameters() {
         const {
           leds,
         } = this.$refs.ring;
-        for (let i = this.value; i < leds.length; i++) {
+        for (let i = 0; i < leds.length; i++) {
           const led = leds[i];
           led.color = '#eeeeee';
         }
-        if (this.value > 0) {
-          for (let i = 0; i <= this.value; i++) {
-            leds[i].color = Color.rgbToHTMLColor(Color.lerpColor(Color.htmlColorToRGB('#ffeb3b'), 0, Color.htmlColorToRGB('#ff5722'), leds.length, i));
-          }
+        const trailSize = 12;
+        for (let i = 0; i < trailSize; i++) {
+          leds[i].color = Color.rgbToHTMLColor(Color.lerpColor(Color.htmlColorToRGB(this.gradient.start), 0, Color.htmlColorToRGB(this.gradient.end), trailSize, i));
         }
       },
-      ringUpdate() {
+      setGradient(start, end) {
+        this.gradient = {
+          start,
+          end,
+        };
+        this.updateModeParameters();
+      },
+      ringUpdate(leds) {
+        const firstLedColor = leds[0].color;
+        for (let i = 0; i < leds.length - 1; i++) {
+          const led = leds[i];
+          const nextLed = leds[(i + 1) % leds.length];
+          led.color = nextLed.color;
+        }
+        const lastLed = leds[leds.length - 1];
+        lastLed.color = firstLedColor;
       },
     },
 

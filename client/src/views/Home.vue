@@ -9,8 +9,17 @@
     </v-toolbar>
     <v-content>
       <v-tabs show-arrows v-model="active" color="cyan" dark slider-color="yellow">
-        <v-tab v-for="n in 10" :key="n" ripple>
-          Item {{ n }}
+        <v-tab ripple>
+          Rainbow
+        </v-tab>
+        <v-tab ripple>
+          Setup
+        </v-tab>
+        <v-tab ripple>
+          Gauge
+        </v-tab>
+        <v-tab ripple>
+          Wave
         </v-tab>
         <v-tab-item>
           <v-container grid-list-md>
@@ -19,6 +28,53 @@
                 <v-card>
                   <v-card-media>
                     <iro-rainbow-mode></iro-rainbow-mode>
+                  </v-card-media>
+                  <v-card-actions>
+                    <v-btn flat color="orange">Send to</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-card fill-height>
+                  <v-card-actions>
+                    <v-layout row wrap>
+                    </v-layout>
+                  </v-card-actions>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-tab-item>
+        <v-tab-item>
+          <v-container grid-list-md>
+            <v-layout row wrap>
+              <v-flex fill-height xs12 sm6 md6>
+                <v-card>
+                  <v-card-media>
+                    <iro-setup-mode></iro-setup-mode>
+                  </v-card-media>
+                  <v-card-actions>
+                    <v-btn flat color="orange">Send to</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-card fill-height>
+                  <v-card-actions>
+                    <v-layout row wrap>
+                    </v-layout>
+                  </v-card-actions>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-tab-item>
+        <v-tab-item>
+          <v-container grid-list-md>
+            <v-layout row wrap>
+              <v-flex fill-height xs12 sm6 md6>
+                <v-card>
+                  <v-card-media>
                     <iro-gauge-mode ref="gauge"></iro-gauge-mode>
                   </v-card-media>
                   <v-card-actions>
@@ -31,10 +87,40 @@
                   <v-card-actions>
                     <v-layout row wrap>
                       <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="gauge.gradient.start" @colorChange="changeStartColor"></iro-color-picker>
+                        <iro-color-picker label="gauge.gradient.start" @colorChange="changeGaugeStartColor"></iro-color-picker>
                       </v-flex>
                       <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="gauge.gradient.end" @colorChange="changeEndColor"></iro-color-picker>
+                        <iro-color-picker label="gauge.gradient.end" @colorChange="changeGaugeEndColor"></iro-color-picker>
+                      </v-flex>
+                    </v-layout>
+                  </v-card-actions>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-tab-item>
+        <v-tab-item>
+          <v-container grid-list-md>
+            <v-layout row wrap>
+              <v-flex fill-height xs12 sm6 md6>
+                <v-card>
+                  <v-card-media>
+                    <iro-wave-mode ref="wave"></iro-wave-mode>
+                  </v-card-media>
+                  <v-card-actions>
+                    <v-btn flat color="orange">Send to</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-flex>
+              <v-flex xs12 sm6 md6>
+                <v-card fill-height>
+                  <v-card-actions>
+                    <v-layout row wrap>
+                      <v-flex fill-height xs12 sm12 md12>
+                        <iro-color-picker label="wave.gradient.start" @colorChange="changeWaveStartColor"></iro-color-picker>
+                      </v-flex>
+                      <v-flex fill-height xs12 sm12 md12>
+                        <iro-color-picker label="wave.gradient.end" @colorChange="changeWaveEndColor"></iro-color-picker>
                       </v-flex>
                     </v-layout>
                   </v-card-actions>
@@ -44,39 +130,6 @@
           </v-container>
         </v-tab-item>
       </v-tabs>
-      <!--v-container fluid fill-height>
-        <v-layout justify-center align-center>
-          <v-flex text-xs-center>
-            <v-carousel :cycle="false">
-              <v-carousel-item>
-                <iro-ring></iro-ring>
-              </v-carousel-item>
-              <v-carousel-item>
-                <iro-setup-mode></iro-setup-mode>
-              </v-carousel-item>
-              <v-carousel-item>
-                <iro-rainbow-mode></iro-rainbow-mode>
-              </v-carousel-item>
-              <v-carousel-item>
-                <v-container grid-list-md text-xs-center>
-                  <v-layout row wrap>
-                    <v-flex xs12 sm6 md6>
-                      <iro-gauge-mode ref="gauge"></iro-gauge-mode>
-                    </v-flex>
-                    <v-flex xs12 sm6 md6>
-                      <iro-color-picker @colorChange="changeStartColor"></iro-color-picker>
-                      <iro-color-picker @colorChange="changeEndColor"></iro-color-picker>
-                    </v-flex>
-                    <v-flex xs12 sm6 md6>
-                      <v-btn flat color="orange">Send to</v-btn>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-carousel-item>
-            </v-carousel>
-          </v-flex>
-        </v-layout>
-      </v-container-->
     </v-content>
   </v-app>
 </template>
@@ -86,6 +139,7 @@
   import HelloWorld from '@/components/HelloWorld.vue';
   import IroRing from '@/components/IroRing.vue';
   import IroGaugeMode from '@/components/modes/IroGaugeMode.vue';
+  import IroWaveMode from '@/components/modes/IroWaveMode.vue';
   import IroSetupMode from '@/components/modes/IroSetupMode.vue';
   import IroRainbowMode from '@/components/modes/IroRainbowMode.vue';
   import IroColorPicker from '@/components/IroColorPicker.vue';
@@ -101,6 +155,7 @@
       IroColorPicker,
       IroRing,
       IroGaugeMode,
+      IroWaveMode,
       HelloWorld,
       IroSetupMode,
       IroRainbowMode,
@@ -118,13 +173,21 @@
       text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
     }),
     methods: {
-      changeStartColor(startColor) {
+      changeGaugeStartColor(startColor) {
         this.startColor = startColor.code;
         this.$refs.gauge.setGradient(this.startColor, this.endColor);
       },
-      changeEndColor(endColor) {
+      changeGaugeEndColor(endColor) {
         this.endColor = endColor.code;
         this.$refs.gauge.setGradient(this.startColor, this.endColor);
+      },
+      changeWaveStartColor(startColor) {
+        this.startColor = startColor.code;
+        this.$refs.wave.setGradient(this.startColor, this.endColor);
+      },
+      changeWaveEndColor(endColor) {
+        this.endColor = endColor.code;
+        this.$refs.wave.setGradient(this.startColor, this.endColor);
       },
       next() {
         const active = parseInt(this.active, 10);
