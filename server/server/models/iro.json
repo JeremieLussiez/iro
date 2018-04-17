@@ -1,0 +1,14 @@
+{
+  "name": "iro",
+  "description": "IROs are visual notification devices.",
+  "plural": "iros",
+  "properties": {
+    "name": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
