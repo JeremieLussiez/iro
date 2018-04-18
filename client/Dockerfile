@@ -7,6 +7,7 @@ COPY package.json /usr/src/app/
 ENV PATH="./node_modules/.bin:${PATH}"
 RUN npm install
 RUN ls .
+RUN ls ./node_modules
 RUN ls ./node_modules/.bin
 COPY . /usr/src/app
 RUN npm run build
