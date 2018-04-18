@@ -3,15 +3,24 @@ services:
   app:
     container_name: app
     restart: always
-    build: .
+    build: ./server
     ports:
       - "80:3000"
     links:
       - iro-mongo
     depends_on:
+      - iro-web
       - iro-mongo
+    volumes:
+      - /var/www:/var/www
   iro-mongo:
     container_name: mongo
     image: mongo
     volumes:
       - /var/data:/data/db
+  iro-web:
+    container_name: web
+    restart: always
+    build: ./client
+    volumes:
+      - /var/www:/var/www
