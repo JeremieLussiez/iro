@@ -5,22 +5,22 @@
         <v-layout align-center justify-center>
           <v-flex xs12 sm8 md3>
             <v-card class="elevation-12">
-              <v-toolbar dark color="black">
-                <img width="54" height="54" style="margin-right: 4px;" src="../assets/logo.svg">
-                <v-toolbar-title>__login.screen.application.name__</v-toolbar-title>
+              <v-toolbar color="blue">
+                <img width="54" height="54" style="margin-right: 4px;" src="assets/logo-black.svg">
+                <v-toolbar-title color="white">__login.screen.application.name__</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field color="grey darken-4" prepend-icon="person" name="login" label="login.screen.login" type="text">
+                  <v-text-field color="blue" v-model="email" prepend-icon="person" name="email" label="login.screen.email" id="email" type="text">
                   </v-text-field>
-                  <v-text-field color="grey darken-4" prepend-icon="lock" name="password" label="login.screen.password" id="password" type="password">
+                  <v-text-field color="blue" v-model="password" prepend-icon="lock" name="password" label="login.screen.password" id="password" type="password">
                   </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn outline color="grey darken-4" @click.native="connect()">__login.screen.create__</v-btn>
-                <v-btn outline color="grey darken-4" @click.native="connect()">__login.screen.connect__</v-btn>
+                <v-btn outline color="blue" @click.native="connect()">__login.screen.create__</v-btn>
+                <v-btn outline color="blue" @click.native="connect()">__login.screen.connect__</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -39,7 +39,7 @@
     props: [],
     data() {
       return {
-        login: '',
+        email: '',
         password: '',
       };
     },
@@ -55,6 +55,16 @@
 
     methods: {
       connect() {
+        this.$http.post('http://localhost:3000/api/users/login', {
+          email: this.email,
+          password: this.password,
+        }).then(
+          (result) => {
+            console.log(result);
+          },
+          (error) => {
+            console.log(error);
+          })
         // loginServiceInstance.login(this.login, this.password, this.client);
       },
     },
