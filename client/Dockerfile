@@ -2,7 +2,7 @@ FROM node:latest
 ENV NODE_ENV production
 RUN mkdir -p /usr/src/app
 RUN mkdir -p /var/www
-RUN npm install -g @vue/cli
+RUN npm install @vue/cli
 WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 RUN npm install
