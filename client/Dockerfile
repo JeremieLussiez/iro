@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 COPY package.json /usr/src/app/
 RUN npm install
 RUN npm install @vue/cli
+RUN npm install @vue/cli-service
 COPY . /usr/src/app
 RUN npm run build
 COPY /usr/src/app/dist/ /var/www/
