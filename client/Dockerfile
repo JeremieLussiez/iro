@@ -8,4 +8,6 @@ ENV PATH="./node_modules/.bin:${PATH}"
 RUN npm install
 COPY . /usr/src/app
 RUN npm run build
-COPY /usr/src/app/dist/ /var/www/
+RUN ls -A .
+VOLUME /var/www /var/www
+COPY . /var/www/
