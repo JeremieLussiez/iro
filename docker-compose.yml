@@ -12,7 +12,7 @@ services:
       - iro-web
       - iro-mongo
     volumes:
-      - staticfiles:/var/www
+      - /var/www:/var/www:rw
   iro-mongo:
     container_name: mongo
     image: mongo
@@ -23,6 +23,6 @@ services:
     restart: always
     build: ./client
     volumes:
-      - staticfiles:/var/www
+      - /var/www:/var/www:rw
 volumes:
   staticfiles: {}
