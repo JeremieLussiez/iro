@@ -5,6 +5,10 @@ const app = loopback();
 module.exports = app;
 
 app.start = function () {
+  app.use(/^\/(?!api).*$/, (req, res, next) => {
+    res.setHeader('Cache-Control', 'private, max-age=60');
+    next();
+  });
   // start the web server
   return app.listen(() => {
     app.emit('started');
