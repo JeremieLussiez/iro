@@ -7,5 +7,4 @@ RUN npm install
 COPY . /usr/src/app
 #ENV NODE_ENV production
 RUN npm run build
-VOLUME /var/www /var/www
-COPY /usr/src/app/dist/* /var/www/
+RUN cp -R /usr/src/app/dist/* /var/www/
