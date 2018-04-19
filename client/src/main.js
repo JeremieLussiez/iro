@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import moment from 'moment';
-import VueResource from 'vue-resource';
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -24,7 +23,6 @@ Vue.filter('date', (date) => {
 Vue.config.productionTip = false;
 
 Vue.use(Vuetify);
-Vue.use(VueResource);
 /*
 Vue.http.get('http://localhost:3000/api/iros').then((response) => {
   console.log('RESULT', response.body);

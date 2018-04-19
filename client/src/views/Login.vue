@@ -33,6 +33,8 @@
 <script>
   // import LoginService from './loginService';
 
+  import axios from 'axios';
+
   // const loginServiceInstance = new LoginService();
   export default {
     name: 'login-screen',
@@ -55,7 +57,7 @@
 
     methods: {
       connect() {
-        this.$http.post('http://localhost:3000/api/users/login', {
+        axios.post('http://localhost:3000/api/users/login', {
           email: this.email,
           password: this.password,
         }).then(
