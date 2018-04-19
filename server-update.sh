@@ -9,4 +9,4 @@ export NODE_ENV=production
 echo $NODE_ENV
 killall node
 killall nodemon
-npm run dev
+npm run production
