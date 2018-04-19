@@ -6,7 +6,7 @@ module.exports = app;
 
 app.start = function () {
   app.use(/^\/(?!api).*$/, (req, res, next) => {
-    res.setHeader('Cache-Control', 'private, max-age=60');
+    res.setHeader('Cache-Control', 'private, max-age=3600');
     next();
   });
   // start the web server

@@ -19,6 +19,7 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
+                <v-btn outline color="blue" @click.native="goHome()">__login.screen.test__</v-btn>
                 <v-btn outline color="blue" @click.native="connect()">__login.screen.create__</v-btn>
                 <v-btn outline color="blue" @click.native="connect()">__login.screen.connect__</v-btn>
               </v-card-actions>
@@ -34,6 +35,7 @@
   // import LoginService from './loginService';
 
   import axios from 'axios';
+  import router from '@/router.js';
 
   // const loginServiceInstance = new LoginService();
   export default {
@@ -55,7 +57,14 @@
          }); */
     },
 
+    beforeRouteEnter(route, from, next) {
+      console.log(route.params);
+    },
+
     methods: {
+      goHome() {
+        router.push({path: '/login', params: {mode: 'update'}});
+      },
       connect() {
         axios.post('http://localhost:3000/api/users/login', {
           email: this.email,

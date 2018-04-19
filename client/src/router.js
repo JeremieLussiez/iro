@@ -6,7 +6,7 @@ import Login from './views/Login.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path: '/',
@@ -23,5 +23,20 @@ export default new Router({
       name: 'login',
       component: Login,
     },
+    {
+      path: '**',
+      name: 'default',
+      component: About,
+    },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  if (false || to.path === '/login' || to.path === '/') {
+    next();
+  } else {
+    next('login');
+  }
+});
+
+export default router;
