@@ -5,4 +5,5 @@ curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
 apt-get install -y build-essential
 apt-get install -y mongodb
 apt-get install -y git
+apt-get install -y psmisc
 systemctl start mongodb
