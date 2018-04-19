@@ -8,5 +8,5 @@ npm install
 npm run build
 cd ../server
 npm install
+NODE_ENV=production
 npm run dev &
-
