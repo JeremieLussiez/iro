@@ -1,6 +1,6 @@
 {
   "iro": {
-    "host": "127.0.0.1",
+    "host": "iro-mongo",
     "port": 27017,
     "url": "",
     "database": "iro",
