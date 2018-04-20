@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.start = function () {
   // start the web server
-  return server.listen(app.get('port'), () => {
+  server.listen(app.get('port'), () => {
     const baseUrl = (sslAvailable ? 'https://' : 'http://') + app.get('host') + ':' + app.get('port');
     app.emit('started', baseUrl);
     console.log('LoopBack server listening @ %s%s', baseUrl, '/');
@@ -36,6 +36,7 @@ app.start = function () {
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
   });
+  return server;
   /*
   return app.listen(() => {
     app.emit('started');
