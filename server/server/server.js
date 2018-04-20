@@ -20,7 +20,6 @@ if (process.env.NODE_ENV === 'production') {
   console.log('CERT = ');
   console.log(options.cert);
   server = https.createServer(options, app);
-  failServer = http.createServer(app);
   sslAvailable = true;
 } else {
   server = http.createServer(app);
