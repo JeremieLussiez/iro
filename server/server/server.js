@@ -15,6 +15,10 @@ if (process.env.NODE_ENV === 'production') {
     key: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/privkey1.pem').toString(),
     cert: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/cert1.pem').toString(),
   };
+  console.log('KEY = ');
+  console.log(options.key);
+  console.log('CERT = ');
+  console.log(options.cert);
   server = https.createServer(options, app);
   failServer = http.createServer(app);
   sslAvailable = true;
@@ -24,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.start = function () {
   // start the web server
-  server.listen(app.get('port'), () => {
+  return server.listen(app.get('port'), () => {
     const baseUrl = (sslAvailable ? 'https://' : 'http://') + app.get('host') + ':' + app.get('port');
     app.emit('started', baseUrl);
     console.log('LoopBack server listening @ %s%s', baseUrl, '/');
@@ -33,7 +37,6 @@ app.start = function () {
       console.log('Browse your REST API at %s%s', baseUrl, explorerPath);
     }
   });
-  return server;
   /*
   return app.listen(() => {
     app.emit('started');
