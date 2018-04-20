@@ -6,4 +6,5 @@ apt-get install -y build-essential
 apt-get install -y mongodb
 apt-get install -y git
 apt-get install -y psmisc
+apt-get install -y certbot
 systemctl start mongodb

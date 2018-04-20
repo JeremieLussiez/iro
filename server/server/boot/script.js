@@ -41,7 +41,7 @@ User.find({
 }, (err) => {
   console.log(err);
 });
-
+/*
 setInterval(() => {
   User.create([
     {
@@ -55,6 +55,7 @@ setInterval(() => {
     console.log(users);
   });
 }, 2000);
+*/
 /*
 User.create([
   {

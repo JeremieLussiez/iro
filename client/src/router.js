@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import About from './views/About.vue';
 import Login from './views/Login.vue';
+import {store} from "./store";
 
 Vue.use(Router);
 
@@ -31,12 +32,12 @@ const router = new Router({
   ],
 });
 
+export default router;
+
 router.beforeEach((to, from, next) => {
-  if (false || to.path === '/login' || to.path === '/') {
+  if (store.state.authenticationToken.length > 0 || to.path === '/login' || to.path === '/') {
     next();
   } else {
     next('login');
   }
 });
-
-export default router;

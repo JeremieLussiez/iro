@@ -6,8 +6,8 @@
           <v-flex xs12 sm8 md3>
             <v-card class="elevation-12">
               <v-toolbar color="blue">
-                <img width="54" height="54" style="margin-right: 4px;" src="assets/logo-black.svg">
-                <v-toolbar-title color="white">__login.screen.application.name__</v-toolbar-title>
+                <img width="54" height="54" style="margin-right: 4px;" src="assets/logo-white.svg">
+                <v-toolbar-title style="color: white;">__login.screen.application.name__</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
                 <v-form>
@@ -32,12 +32,11 @@
 </template>
 
 <script>
-  // import LoginService from './loginService';
+  import {
+    store,
+    AUTHENTICATE_USER,
+  } from '@/store.js';
 
-  import axios from 'axios';
-  import router from '@/router.js';
-
-  // const loginServiceInstance = new LoginService();
   export default {
     name: 'login-screen',
     props: [],
@@ -47,36 +46,20 @@
         password: '',
       };
     },
-
-    mounted() {
-      /* Vue.http
-         .get('/api/networks')
-         .then((response) => {
-           // console.log(response);
-           this.accessPoints = response.body;
-         }); */
-    },
-
-    beforeRouteEnter(route, from, next) {
-      console.log(route.params);
-    },
-
+    /*
+        beforeRouteEnter(route, from, next) {
+          console.log(route.params);
+        },
+    */
     methods: {
       goHome() {
         router.push({path: '/login', params: {mode: 'update'}});
       },
       connect() {
-        axios.post('http://localhost:3000/api/users/login', {
+        store.dispatch(AUTHENTICATE_USER, {
           email: this.email,
           password: this.password,
-        }).then(
-          (result) => {
-            console.log(result);
-          },
-          (error) => {
-            console.log(error);
-          })
-        // loginServiceInstance.login(this.login, this.password, this.client);
+        });
       },
     },
 
