@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "nodemon .",
-    "production": "NODE_ENV=production nodemon .",
+    "production": "NODE_ENV=production node .",
     "lint": "eslint .",
     "start": "node .",
     "posttest": "npm run lint && nsp check"
