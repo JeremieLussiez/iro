@@ -1,7 +1,7 @@
 {
   "restApiRoot": "/api",
   "host": "www.my-iro.com",
-  "port": 80,
+  "port": 443,
   "remoting": {
     "context": false,
     "rest": {
