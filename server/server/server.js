@@ -16,6 +16,7 @@ if (process.env.NODE_ENV === 'production') {
     cert: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/cert1.pem').toString(),
   };
   server = https.createServer(options, app);
+  failServer = http.createServer(app);
   sslAvailable = true;
 } else {
   server = http.createServer(app);
@@ -23,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 
 app.start = function () {
   // start the web server
-  server.listen(app.get('port'), function () {
+  server.listen(app.get('port'), () => {
     const baseUrl = (sslAvailable ? 'https://' : 'http://') + app.get('host') + ':' + app.get('port');
     app.emit('started', baseUrl);
     console.log('LoopBack server listening @ %s%s', baseUrl, '/');
