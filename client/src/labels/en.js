@@ -10,6 +10,7 @@ export default {
 
     'login.screen.application.name': 'Join the iros ^_^',
     'login.screen.login': 'User',
+    'login.screen.email': 'Email',
     'login.screen.password': 'Password',
     'login.screen.connect': 'Connect',
     'login.screen.create': 'New Iro ?',

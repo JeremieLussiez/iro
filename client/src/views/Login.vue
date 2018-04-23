@@ -11,9 +11,9 @@
               </v-toolbar>
               <v-card-text>
                 <v-form>
-                  <v-text-field color="blue" v-model="email" prepend-icon="person" name="email" label="login.screen.email" id="email" type="text">
+                  <v-text-field color="blue" v-model="email" prepend-icon="person" name="email" label="__login.screen.email__" id="email" type="text">
                   </v-text-field>
-                  <v-text-field color="blue" v-model="password" prepend-icon="lock" name="password" label="login.screen.password" id="password" type="password">
+                  <v-text-field color="blue" v-model="password" prepend-icon="lock" name="password" label="__login.screen.password__" id="password" type="password">
                   </v-text-field>
                 </v-form>
               </v-card-text>
