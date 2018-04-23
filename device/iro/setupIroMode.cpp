@@ -3,7 +3,7 @@
 #include "./configuration.h"
 
 void SetupIroMode::animate(Adafruit_NeoPixel *pixels) {
-  if (this->loopDelay > LOOP_DELAY) {
+  if (this->loopDelay > LOOP_DELAY / 2) {
     this->loopDelay = 0;
     this->indicatorPosition = (this->indicatorPosition + 1) % NUMPIXELS;
     for (int i = 0; i < NUMPIXELS; i++) {

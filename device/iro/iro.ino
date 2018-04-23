@@ -4,6 +4,7 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include <FS.h>
+#include <Ticker.h>
 
 #include "./configuration.h"
 #include "./iroModesManager.h"
@@ -15,6 +16,8 @@
 
 const char* ssid = "***";
 const char* password = "***";
+
+Ticker animationTimer;
 
 ESP8266WebServer server(80);
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIXELS_PIN, NEO_GRB + NEO_KHZ800);
@@ -146,6 +149,7 @@ void setup(void) {
     pixels.setPixelColor(i, pixels.Color(0, 0, 0));
   }
   pixels.show();
+  animationTimer.attach(0.01, animate);
 
   WiFi.softAPdisconnect();
   WiFi.disconnect();
@@ -214,7 +218,10 @@ void setup(void) {
 }
 
 void loop(void) {
-  iroModesManager->animateModes();
   server.handleClient();
+}
+
+void animate() {
+  iroModesManager->animateModes();
 }
 

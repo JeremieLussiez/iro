@@ -2,28 +2,24 @@
 #include "./iroModesManager.h"
 
 void WaveIroMode::animate(Adafruit_NeoPixel *pixels) {
-  if (this->loopDelay > LOOP_DELAY / 2) {
-    this->loopDelay = 0;
-    this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor, 1);
-    this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor, 1);
-    for (int i = 0; i < NUMPIXELS; i++) {
-      pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
-    }
-    pixels->setPixelColor(this->waveIndex, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-    int lerpSpeedR = abs(this->currentForegroundColor.r - this->currentBackgroundColor.r) / WAVE_STEPS;
-    int lerpSpeedG = abs(this->currentForegroundColor.g - this->currentBackgroundColor.g) / WAVE_STEPS;
-    int lerpSpeedB = abs(this->currentForegroundColor.b - this->currentBackgroundColor.b) / WAVE_STEPS;
-    Color trail = this->currentForegroundColor;
-    for (int i = 1; i < WAVE_STEPS; i++) {
-      trail.r = lerp(trail.r, this->currentBackgroundColor.r, lerpSpeedR);
-      trail.g = lerp(trail.g, this->currentBackgroundColor.g, lerpSpeedG);
-      trail.b = lerp(trail.b, this->currentBackgroundColor.b, lerpSpeedB);
-      pixels->setPixelColor((this->waveIndex - i) % NUMPIXELS, pixels->Color(trail.r, trail.g, trail.b));
-    }
-    pixels->show();
-    this->waveIndex++;
+  this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor, 1);
+  this->currentBackgroundColor = lerpColor(this->currentBackgroundColor, this->targetBackgroundColor, 1);
+  for (int i = 0; i < NUMPIXELS; i++) {
+    pixels->setPixelColor(i, pixels->Color(this->currentBackgroundColor.r, this->currentBackgroundColor.g, this->currentBackgroundColor.b));
   }
-  this->loopDelay++;
+  pixels->setPixelColor(this->waveIndex, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
+  int lerpSpeedR = abs(this->currentForegroundColor.r - this->currentBackgroundColor.r) / WAVE_STEPS;
+  int lerpSpeedG = abs(this->currentForegroundColor.g - this->currentBackgroundColor.g) / WAVE_STEPS;
+  int lerpSpeedB = abs(this->currentForegroundColor.b - this->currentBackgroundColor.b) / WAVE_STEPS;
+  Color trail = this->currentForegroundColor;
+  for (int i = 1; i < WAVE_STEPS; i++) {
+    trail.r = lerp(trail.r, this->currentBackgroundColor.r, lerpSpeedR);
+    trail.g = lerp(trail.g, this->currentBackgroundColor.g, lerpSpeedG);
+    trail.b = lerp(trail.b, this->currentBackgroundColor.b, lerpSpeedB);
+    pixels->setPixelColor((this->waveIndex - i) % NUMPIXELS, pixels->Color(trail.r, trail.g, trail.b));
+  }
+  pixels->show();
+  this->waveIndex++;
 }
 
 void WaveIroMode::handleRoute() {
