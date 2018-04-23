@@ -8,7 +8,7 @@ const admins = [
     password: process.env.NODE_ENV === 'production' ? passwordGenerator(5) : 'iro',
   },
   {
-    username: 'Loots',
+    username: 'Lootss',
     firstName: 'Lucille',
     lastName: 'Dhaleine',
     email: 'lucille.dhaleine@gmail.com',
