@@ -10,6 +10,9 @@
     },
     "lastName": {
       "type": "string"
+    },
+    "birthday": {
+      "type": "date"
     }
   },
   "validations": [],
@@ -38,6 +41,5 @@
       "principalId": "admin",
       "permission": "ALLOW"
     }
-  ],
-  "methods": {}
+  ]
 }

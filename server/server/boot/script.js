@@ -1,10 +1,16 @@
-const server = require('../../server/server');
+const server = require('../server');
+const {admins} = require('../setup/admins');
+const {
+  gaugeMessage,
+  rainbowMessage,
+} = require('../setup/messages');
 
 const {
   Role,
   RoleMapping,
 } = server.models;
 const User = server.models.user;
+const Message = server.models.message;
 
 function pickOne(list) {
   return list[Math.round(Math.random() * (list.length - 1))];
@@ -21,62 +27,47 @@ function passwordGenerator(length) {
   return password;
 }
 
-User.find({
+function generateMessages() {
+
+}
+
+Role.findOne({
   where: {
-    or: [
-      {
-        username: 'RPGWanderer',
-      },
-      {
-        username: 'Loots',
-      },
-    ],
-  },
-}).then((users) => {
-  ['Loots', 'RPGWanderer'].forEach((userToCreate) => {
-    if (!users.find(user => user.username === userToCreate)) {
-      console.log('Creating ', userToCreate);
-    }
-  });
-}, (err) => {
-  console.log(err);
-});
-/*
-setInterval(() => {
-  User.create([
-    {
-      username: passwordGenerator(5),
-      email: `${passwordGenerator(5)}@gmail.com`,
-      firstName: 'Bob',
-      lastName: 'Ramon',
-      password: 'opensesame',
-    },
-  ], (err, users) => {
-    console.log(users);
-  });
-}, 2000);
-*/
-/*
-User.create([
-  {
-    username: 'RPGWanderer',
-    email: 'jeremie.lussiez@gmail.com',
-    firstName: 'Jérémie',
-    lastName: 'Lussiez',
-    password: 'opensesame',
-  },
-], (err, users) => {
-  if (err) throw err;
-  Role.create({
+    name: 'admin'
+  }
+}).then((adminRole => {
+  return adminRole
+})).then(adminRole => {
+  if (adminRole !== null) {
+    return adminRole;
+  }
+  return Role.create({
     name: 'admin',
-  }, (err, role) => {
-    if (err) throw err;
-    role.principals.create({
-      principalType: RoleMapping.USER,
-      principalId: users[0].id,
-    }, (err, principal) => {
-      if (err) throw err;
+  });
+}).then(adminRole => {
+  User.find({
+    where: {
+      or: admins.map(admin => {
+        return {
+          username: admin.username
+        };
+      }),
+    },
+  }).then((users) => {
+    admins.forEach((adminToCreate) => {
+      if (!users.find(user => user.username === adminToCreate.username)) {
+        console.log('Creating', adminToCreate.username, 'with', adminToCreate.password, 'as password...');
+        User.create(adminToCreate, (err, createdAdmin) => {
+          if (err) throw err;
+          adminRole.principals.create({
+            principalType: RoleMapping.USER,
+            principalId: createdAdmin.id,
+          });
+        });
+      }
     });
   });
 });
-*/
+
+Message.create(gaugeMessage);
+Message.create(rainbowMessage);

@@ -3,10 +3,22 @@
   "description": "IROs are visual notification devices.",
   "plural": "iros",
   "properties": {
+    "serialNumber": {
+      "type": "string"
+    },
+    "pin": {
+      "type": "string"
+    },
     "name": {
+      "type": "string"
+    },
+    "description": {
       "type": "string"
     }
   },
+  "hidden": [
+    "pin"
+  ],
   "validations": [],
   "relations": {},
   "acls": [],

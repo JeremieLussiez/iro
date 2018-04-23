@@ -3,28 +3,26 @@
   "description": "A message. The server will make this message available to IROs.",
   "plural": "messages",
   "properties": {
-    "content": {
-      "type": {
-        "payload": "object"
-      }
+    "payload": {
+      "type": "object"
+    },
+    "text": {
+      "type": "string"
     },
     "date": {
       "type": "date"
+    },
+    "to": {
+      "type": "string"
+    },
+    "from": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number"
     }
   },
   "validations": [],
-  "relations": {
-    "from": {
-      "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "from"
-    },
-    "to": {
-      "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "to"
-    }
-  },
   "acls": [],
   "methods": {}
 }
