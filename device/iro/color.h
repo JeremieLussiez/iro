@@ -13,6 +13,8 @@ Color lerpColor(Color current, Color target, int lerpSpeed);
 
 bool checkColor(Color);
 bool areSameColor(Color current, Color target);
+int asciiToInt(char c);
+void hexToInt(String color, int rgb[]);
 
 #endif
 
