@@ -12,10 +12,6 @@ const {
 const User = server.models.user;
 const Message = server.models.message;
 
-function generateMessages() {
-
-}
-
 Role.findOne({
   where: {
     name: 'admin',
