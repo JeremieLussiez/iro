@@ -136,7 +136,6 @@
 
 <script>
   // @ is an alias to /src
-  import HelloWorld from '@/components/HelloWorld.vue';
   import IroRing from '@/components/IroRing.vue';
   import IroGaugeMode from '@/components/modes/IroGaugeMode.vue';
   import IroWaveMode from '@/components/modes/IroWaveMode.vue';
@@ -156,7 +155,6 @@
       IroRing,
       IroGaugeMode,
       IroWaveMode,
-      HelloWorld,
       IroSetupMode,
       IroRainbowMode,
       IroMenu,

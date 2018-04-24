@@ -19,8 +19,6 @@
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn outline color="blue" @click.native="goHome()">__login.screen.test__</v-btn>
-                <v-btn outline color="blue" @click.native="connect()">__login.screen.create__</v-btn>
                 <v-btn outline color="blue" @click.native="connect()">__login.screen.connect__</v-btn>
               </v-card-actions>
             </v-card>
@@ -32,37 +30,24 @@
 </template>
 
 <script>
-  import {
-    store,
-    AUTHENTICATE_USER,
-  } from '@/store.js';
+import {store, AUTHENTICATE_USER} from '@/store.js';
 
-  export default {
-    name: 'login-screen',
-    props: [],
-    data() {
-      return {
-        email: '',
-        password: '',
-      };
+export default {
+  name: 'login-screen',
+  props: [],
+  data() {
+    return {
+      email: '',
+      password: '',
+    };
+  },
+  methods: {
+    connect() {
+      store.dispatch(AUTHENTICATE_USER, {
+        email: this.email,
+        password: this.password,
+      });
     },
-    /*
-        beforeRouteEnter(route, from, next) {
-          console.log(route.params);
-        },
-    */
-    methods: {
-      goHome() {
-        router.push({path: '/login', params: {mode: 'update'}});
-      },
-      connect() {
-        store.dispatch(AUTHENTICATE_USER, {
-          email: this.email,
-          password: this.password,
-        });
-      },
-    },
-
-  };
-
+  },
+};
 </script>
