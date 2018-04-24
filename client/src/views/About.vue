@@ -16,7 +16,7 @@
           >
             <img src="assets/logo-white.svg" alt="IRO" height="400" style="opacity: 0.8">
             <h1 class="white--text mb-2 display-1 text-xs-center"></h1>
-            <div class="subheading mb-3 text-xs-center">Colors... And beyond !</div>
+            <div class="subheading mb-3 text-xs-center">Colors... And beyond&nbsp;!</div>
             <v-btn
               class="blue lighten-2 mt-5"
               dark
@@ -128,7 +128,7 @@
                   <div class="headline">Contact us</div>
                 </v-card-title>
                 <v-card-text>
-                  For obvious reasons and given all the web crawlers lurking all over the place, we are not providing everything here. Yet... Oh, by the way, don't phone us, use our non-existent email !
+                  For obvious reasons and given all the web crawlers lurking all over the place, we are not providing everything here. Yet... Oh, by the way, don't phone us, use our non-existent email&nbsp;!
                 </v-card-text>
                 <v-list class="transparent">
                   <v-list-tile>
