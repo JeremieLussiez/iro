@@ -22,112 +22,24 @@
           Wave
         </v-tab>
         <v-tab-item>
-          <v-container grid-list-md>
-            <v-layout row wrap>
-              <v-flex fill-height xs12 sm6 md6>
-                <v-card>
-                  <v-card-media>
-                    <iro-rainbow-mode></iro-rainbow-mode>
-                  </v-card-media>
-                  <v-card-actions>
-                    <v-btn flat color="orange">Send to</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-              <v-flex xs12 sm6 md6>
-                <v-card fill-height>
-                  <v-card-actions>
-                    <v-layout row wrap>
-                    </v-layout>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
+          <iro-mode>
+            <iro-rainbow-mode @sendToServer="sendToServer"></iro-rainbow-mode>
+          </iro-mode>
         </v-tab-item>
         <v-tab-item>
-          <v-container grid-list-md>
-            <v-layout row wrap>
-              <v-flex fill-height xs12 sm6 md6>
-                <v-card>
-                  <v-card-media>
-                    <iro-setup-mode></iro-setup-mode>
-                  </v-card-media>
-                  <v-card-actions>
-                    <v-btn flat color="orange">Send to</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-              <v-flex xs12 sm6 md6>
-                <v-card fill-height>
-                  <v-card-actions>
-                    <v-layout row wrap>
-                    </v-layout>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
+          <iro-mode>
+            <iro-setup-mode @sendToServer="sendToServer"></iro-setup-mode>
+          </iro-mode>
         </v-tab-item>
         <v-tab-item>
-          <v-container grid-list-md>
-            <v-layout row wrap>
-              <v-flex fill-height xs12 sm6 md6>
-                <v-card>
-                  <v-card-media>
-                    <iro-gauge-mode ref="gauge"></iro-gauge-mode>
-                  </v-card-media>
-                  <v-card-actions>
-                    <v-btn flat color="orange">Send to</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-              <v-flex xs12 sm6 md6>
-                <v-card fill-height>
-                  <v-card-actions>
-                    <v-layout row wrap>
-                      <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="__gauge.gradient.start__" @colorChange="changeGaugeStartColor"></iro-color-picker>
-                      </v-flex>
-                      <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="__gauge.gradient.end__" @colorChange="changeGaugeEndColor"></iro-color-picker>
-                      </v-flex>
-                    </v-layout>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
+          <iro-mode>
+            <iro-gauge-mode @sendToServer="sendToServer"></iro-gauge-mode>
+          </iro-mode>
         </v-tab-item>
         <v-tab-item>
-          <v-container grid-list-md>
-            <v-layout row wrap>
-              <v-flex fill-height xs12 sm6 md6>
-                <v-card>
-                  <v-card-media>
-                    <iro-wave-mode ref="wave"></iro-wave-mode>
-                  </v-card-media>
-                  <v-card-actions>
-                    <v-btn flat color="orange">Send to</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-              <v-flex xs12 sm6 md6>
-                <v-card fill-height>
-                  <v-card-actions>
-                    <v-layout row wrap>
-                      <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="__wave.gradient.start__" @colorChange="changeWaveStartColor"></iro-color-picker>
-                      </v-flex>
-                      <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="__wave.gradient.end__" @colorChange="changeWaveEndColor"></iro-color-picker>
-                      </v-flex>
-                    </v-layout>
-                  </v-card-actions>
-                </v-card>
-              </v-flex>
-            </v-layout>
-          </v-container>
+          <iro-mode>
+            <iro-wave-mode @sendToServer="sendToServer"></iro-wave-mode>
+          </iro-mode>
         </v-tab-item>
       </v-tabs>
     </v-content>
@@ -135,62 +47,63 @@
 </template>
 
 <script>
-  // @ is an alias to /src
-  import IroRing from '@/components/IroRing.vue';
-  import IroGaugeMode from '@/components/modes/IroGaugeMode.vue';
-  import IroWaveMode from '@/components/modes/IroWaveMode.vue';
-  import IroSetupMode from '@/components/modes/IroSetupMode.vue';
-  import IroRainbowMode from '@/components/modes/IroRainbowMode.vue';
-  import IroColorPicker from '@/components/IroColorPicker.vue';
-  import IroMenu from '@/views/IroMenu.vue';
-  import Color from '@/tools/color';
+import axios from 'axios';
 
-  export default {
-    name: 'home',
-    props: {
-      source: String,
+import IroMode from '@/components/modes/IroMode.vue';
+import IroGaugeMode from '@/components/modes/IroGaugeMode.vue';
+import IroWaveMode from '@/components/modes/IroWaveMode.vue';
+import IroSetupMode from '@/components/modes/IroSetupMode.vue';
+import IroRainbowMode from '@/components/modes/IroRainbowMode.vue';
+import IroMenu from '@/views/IroMenu.vue';
+
+export default {
+  name: 'home',
+  props: {
+    source: String,
+  },
+  components: {
+    IroGaugeMode,
+    IroWaveMode,
+    IroSetupMode,
+    IroRainbowMode,
+    IroMenu,
+    IroMode,
+  },
+  data: () => ({
+    drawer: null,
+    notifications: false,
+    sound: true,
+    widgets: false,
+    active: null,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+  }),
+  methods: {
+    next() {
+      const active = parseInt(this.active, 10);
+      this.active = (active < 2 ? active + 1 : 0).toString();
     },
-    components: {
-      IroColorPicker,
-      IroRing,
-      IroGaugeMode,
-      IroWaveMode,
-      IroSetupMode,
-      IroRainbowMode,
-      IroMenu,
+    sendToServer(modeName, modeParams = {}) {
+      console.log('sendToServer', modeName, modeParams);
+      const message = {
+        payload: {
+          ...modeParams,
+          type: modeName,
+          speed: 1,
+          duration: -1,
+        },
+        text: 'I did it!!',
+        date: new Date(),
+        to: 'IRO00001',
+        from: 'Lootss',
+      };
+      axios.post('http://localhost:3000/api/messages', message).then(
+        result => {},
+        error => {
+          console.log(error);
+        }
+      );
     },
-    data: () => ({
-      drawer: null,
-      endColor: '#ffffff',
-      startColor: '#ffffff',
-      colors: Color.colors,
-      notifications: false,
-      sound: true,
-      widgets: false,
-      active: null,
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    }),
-    methods: {
-      changeGaugeStartColor(startColor) {
-        this.startColor = startColor.code;
-        this.$refs.gauge.setGradient(this.startColor, this.endColor);
-      },
-      changeGaugeEndColor(endColor) {
-        this.endColor = endColor.code;
-        this.$refs.gauge.setGradient(this.startColor, this.endColor);
-      },
-      changeWaveStartColor(startColor) {
-        this.startColor = startColor.code;
-        this.$refs.wave.setGradient(this.startColor, this.endColor);
-      },
-      changeWaveEndColor(endColor) {
-        this.endColor = endColor.code;
-        this.$refs.wave.setGradient(this.startColor, this.endColor);
-      },
-      next() {
-        const active = parseInt(this.active, 10);
-        this.active = (active < 2 ? active + 1 : 0).toString();
-      },
-    },
-  };
+  },
+};
 </script>
