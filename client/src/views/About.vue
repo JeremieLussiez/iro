@@ -38,15 +38,15 @@
         >
           <v-flex xs12 sm4 class="my-3">
             <div class="text-xs-center">
-              <h2 class="headline">The easiest way to visual notifications !</h2>
+              <h2 class="headline">The easiest way to do visual notifications&nbsp;!</h2>
               <span class="subheading">
-                If there is such a thing as "visual notification". Otherwise, "dibs" !
+                If there is such a thing as "visual notification". Otherwise, "dibs"&nbsp;!
               </span>
             </div>
           </v-flex>
           <v-flex xs12>
             <v-container grid-list-xl>
-              <v-layout row wrap align-center>
+              <v-layout row wrap>
                 <v-flex xs12 md4>
                   <v-card class="elevation-0 transparent">
                     <v-card-text class="text-xs-center">
@@ -56,7 +56,7 @@
                       <div class="headline text-xs-center">Choose your colors !</div>
                     </v-card-title>
                     <v-card-text>
-                      Select you animation and colors in the beautiful Material Design palette and make them shine all over your place ! Will you discover the IRO inside you ?
+                      Select your animation and colors in the beautiful Material Design palette and make them shine all over the place&nbsp;! Will you discover the IRO inside you&nbsp;?
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -69,7 +69,7 @@
                       <div class="headline">Minimal configuration</div>
                     </v-card-title>
                     <v-card-text>
-                      If you can browse this page, your IRO should be able to see the world too. You only have to setup your wifi and login with your account and the rest is up to us ! Don't waste your time and start sending colorful animations right now !
+                      If you can browse this page, your IRO should be able to see the world too. You only have to setup your wifi and login with your account and the rest is up to us&nbsp;! Don't waste your time and start sending colorful animations right now&nbsp;!
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -79,10 +79,10 @@
                       <v-icon x-large class="blue--text text--lighten-2">build</v-icon>
                     </v-card-text>
                     <v-card-title primary-title class="layout justify-center">
-                      <div class="headline text-xs-center">Who said only humans can notify you ?</div>
+                      <div class="headline text-xs-center">Who said only humans can notify you&nbsp;?</div>
                     </v-card-title>
                     <v-card-text>
-                      Here at IRO, we think devices and applications should be able to talk to you, to tell you what they are doing using fabulous colors and mesmerizing animations. We are exposing a nice REST API allowing you to send messages to your favorite IRO from anything capable of using it !
+                      Here at IRO, we think devices and applications should be able to talk to you, to tell you what they are doing using fabulous colors and mesmerizing animations. We are exposing a nice REST API allowing you to send messages to your favorite IRO from anything capable of using it&nbsp;!
                     </v-card-text>
                   </v-card>
                 </v-flex>
@@ -95,7 +95,7 @@
       <section>
         <v-parallax src="assets/background-section.jpg" height="380">
           <v-layout column align-center justify-center>
-            <div class="headline white--text mb-3 text-xs-center">Who thought that sending visual notifications was so easy ?</div>
+            <div class="headline white--text mb-3 text-xs-center">Who knew that sending visual notifications was so easy&nbsp;?</div>
             <em>It's time to find your IRO</em>
             <v-btn
               class="blue lighten-2 mt-5"
@@ -118,7 +118,7 @@
                   <div class="headline">Company info</div>
                 </v-card-title>
                 <v-card-text>
-                  We are not a company, yet. But, if you're looking to buy us, we're open to discuss it right now. Seriously, think of how many things you could do with such a great technology and how many new ideas we would be able to fund with some money... It would be awesome !
+                  We are not a company, yet. But, if you're looking to buy us, we're open to discuss it right now. Seriously, think of how many things you could do with such a great technology and how many new ideas we would be able to fund with some money... It would be awesome&nbsp;!
                 </v-card-text>
               </v-card>
             </v-flex>

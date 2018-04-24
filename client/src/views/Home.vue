@@ -87,10 +87,10 @@
                   <v-card-actions>
                     <v-layout row wrap>
                       <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="gauge.gradient.start" @colorChange="changeGaugeStartColor"></iro-color-picker>
+                        <iro-color-picker label="__gauge.gradient.start__" @colorChange="changeGaugeStartColor"></iro-color-picker>
                       </v-flex>
                       <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="gauge.gradient.end" @colorChange="changeGaugeEndColor"></iro-color-picker>
+                        <iro-color-picker label="__gauge.gradient.end__" @colorChange="changeGaugeEndColor"></iro-color-picker>
                       </v-flex>
                     </v-layout>
                   </v-card-actions>
@@ -117,10 +117,10 @@
                   <v-card-actions>
                     <v-layout row wrap>
                       <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="wave.gradient.start" @colorChange="changeWaveStartColor"></iro-color-picker>
+                        <iro-color-picker label="__wave.gradient.start__" @colorChange="changeWaveStartColor"></iro-color-picker>
                       </v-flex>
                       <v-flex fill-height xs12 sm12 md12>
-                        <iro-color-picker label="wave.gradient.end" @colorChange="changeWaveEndColor"></iro-color-picker>
+                        <iro-color-picker label="__wave.gradient.end__" @colorChange="changeWaveEndColor"></iro-color-picker>
                       </v-flex>
                     </v-layout>
                   </v-card-actions>

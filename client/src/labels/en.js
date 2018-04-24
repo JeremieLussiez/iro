@@ -5,6 +5,8 @@ export default {
     'date.format.message': 'Please follow mm/dd/yyyy format',
     'date.format': 'MM/DD/YYYY',
     'date.pattern': '\\d{2}/\\d{2}/\\d{4}',
+    'gauge.gradient.end': 'End color',
+    'gauge.gradient.start': 'Start color',
     'iro.send': 'Send to Iro',
     'login.screen.accessPoints': 'Access Points',
     'login.screen.application.name': 'Join the iros ^_^',
@@ -16,5 +18,7 @@ export default {
     'login.screen.login': 'User',
     'login.screen.password': 'Password',
     'main.language': 'Language',
+    'wave.gradient.end': 'End color',
+    'wave.gradient.start': 'Start color',
   },
 };
