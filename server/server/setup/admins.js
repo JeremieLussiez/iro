@@ -1,3 +1,18 @@
+function pickOne(list) {
+  return list[Math.round(Math.random() * (list.length - 1))];
+}
+
+function passwordGenerator(length) {
+  let password = '';
+  const consonants = 'zrtpqsdfghjklmwxcvbn';
+  const vowels = 'aeyuio';
+  for (let i = 0; i < length; i++) {
+    password += `${pickOne(consonants)}${pickOne(vowels)}`;
+  }
+  password += Math.round(Math.random() * 9);
+  return password;
+}
+
 const admins = [
   {
     username: 'RPGWanderer',
@@ -18,5 +33,5 @@ const admins = [
 ];
 
 module.exports = {
-  admins
+  admins,
 };

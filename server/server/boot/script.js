@@ -12,46 +12,28 @@ const {
 const User = server.models.user;
 const Message = server.models.message;
 
-function pickOne(list) {
-  return list[Math.round(Math.random() * (list.length - 1))];
-}
-
-function passwordGenerator(length) {
-  let password = '';
-  const consonants = 'zrtpqsdfghjklmwxcvbn';
-  const vowels = 'aeyuio';
-  for (let i = 0; i < length; i++) {
-    password += `${pickOne(consonants)}${pickOne(vowels)}`;
-  }
-  password += Math.round(Math.random() * 9);
-  return password;
-}
-
 function generateMessages() {
 
 }
 
 Role.findOne({
   where: {
-    name: 'admin'
-  }
-}).then((adminRole => {
-  return adminRole
-})).then(adminRole => {
+    name: 'admin',
+  },
+}).then((adminRole => adminRole
+)).then((adminRole) => {
   if (adminRole !== null) {
     return adminRole;
   }
   return Role.create({
     name: 'admin',
   });
-}).then(adminRole => {
+}).then((adminRole) => {
   User.find({
     where: {
-      or: admins.map(admin => {
-        return {
-          username: admin.username
-        };
-      }),
+      or: admins.map(admin => ({
+        username: admin.username,
+      })),
     },
   }).then((users) => {
     admins.forEach((adminToCreate) => {
