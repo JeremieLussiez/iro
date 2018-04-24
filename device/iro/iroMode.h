@@ -9,11 +9,10 @@ class IroModesManager;
 class IroMode {
   private:
     IroModesManager *manager;
-    ESP8266WebServer *server;
   public:
     bool isRunning = false;
     virtual void animate(Adafruit_NeoPixel *pixels) = 0;
-    virtual void handleRoute() = 0;
+    virtual void init(JsonObject root) = 0;
 };
 
 #endif

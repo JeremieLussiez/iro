@@ -1,12 +1,3 @@
-int lerp(int current, int target, int lerpSpeed) {
-  lerpSpeed = lerpSpeed > 0 ? lerpSpeed : 1;
-  int lerped = current;
-  if (current >= target + lerpSpeed) {
-    lerped = current - lerpSpeed;
-  } else if (current <= target - lerpSpeed) {
-    lerped = current + lerpSpeed;
-  } else {
-    lerped = target;
-  }
-  return lerped;
+float lerp(float source, float target, float start, float end, float time) {
+    return source + ((target - source) * (time - start) * (1.0 / (end - start)));
 }

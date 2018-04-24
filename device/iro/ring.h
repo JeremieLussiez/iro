@@ -5,7 +5,7 @@ class Ring {
     void int led[NUMPIXELS];
   public:
     void rotate(int steps);
-    void drawArc(float startPosition, float endPosition, int startColor, int endColor);
-    void drawRing(int color);
+    void drawArc(float startPosition, float endPosition, int startColor[], int endColor[]);
+    void drawRing(int color[]);
 };
 

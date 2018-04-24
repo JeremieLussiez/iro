@@ -1,2 +1,1 @@
-int lerp(int current, int target, int lerpSpeed);
-
+float lerp(float source, float target, float start, float end, float time);
