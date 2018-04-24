@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-actions>
-      <iro-ring ref="ring" @ringUpdate="ringUpdate"></iro-ring>
+      <iro-ring ref="ring" @ledClick="onLedClick" @ringUpdate="ringUpdate"></iro-ring>
     </v-card-actions>
     <v-card-actions>
       <v-layout row wrap>
@@ -13,6 +13,9 @@
         </v-flex>
         <v-flex fill-height xs12 sm12 md12>
           <iro-color-picker label="__gauge.gradient.end__" :color="gradientEnd" @colorChange="colorValue => changeColor('gradientEnd', colorValue)"></iro-color-picker>
+        </v-flex>
+        <v-flex fill-height xs12 sm12 md12>
+          <v-slider v-model="value" label="__gauge.value__" step="1" min="0" max="24" @input="changeValue"></v-slider>
         </v-flex>
       </v-layout>
     </v-card-actions>
@@ -46,13 +49,16 @@ export default {
       this[colorProp] = colorValue;
       this.updateModeParameters();
     },
-    onLedClick(ledIndex) {
-      if (ledIndex + 1 === this.value) {
-        this.value = 0;
-      } else {
-        this.value = ledIndex + 1;
-      }
+    changeValue(newValue) {
+      this.value = newValue;
       this.updateModeParameters();
+    },
+    onLedClick(ledIndex) {
+      if (ledIndex === 0 && this.value === 1) {
+        this.changeValue(0);
+      } else {
+        this.changeValue(ledIndex + 1);
+      }
     },
     setGradient(start, end) {
       this.gradient = {
@@ -83,7 +89,7 @@ export default {
     send() {
       const params = {
         background: this.backgroundColor,
-        value: this.value,
+        value: toPercentage(this.value),
         gradient: {
           end: this.gradientEnd,
           start: this.gradientStart,
@@ -97,4 +103,8 @@ export default {
     this.updateModeParameters();
   },
 };
+
+function toPercentage(value) {
+  return value * 100 / 24;
+}
 </script>

@@ -8,6 +8,7 @@ export default {
     'gauge.background': 'Couleur de fond',
     'gauge.gradient.end': 'Couleur finale',
     'gauge.gradient.start': 'Couleur initiale',
+    'gauge.value': 'Valeur',
     'iro.send': 'Envoyer à Iro',
     'login.screen.accessPoints': 'Points d\'accès',
     'login.screen.application.name': 'Rejoindre les iros ^_^',
