@@ -2,6 +2,14 @@ const StringReplacePlugin = require('string-replace-webpack-plugin');
 
 module.exports = {
   lintOnSave: false,
+  devServer: {
+    proxy: {
+      "/api/*": {
+        target: "http://localhost:3000",
+        secure: false
+      }
+    }
+  },
   configureWebpack: {
     module: {
       rules: [

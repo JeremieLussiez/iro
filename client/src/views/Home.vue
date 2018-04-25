@@ -97,7 +97,7 @@ export default {
         to: 'IRO00001',
         from: 'Lootss',
       };
-      axios.post('http://localhost:3000/api/messages', message).then(
+      axios.post('/api/messages', message).then(
         result => {},
         error => {
           console.log(error);

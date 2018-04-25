@@ -25,7 +25,7 @@ export const store = new Vuex.Store({
     authenticateUser({
       commit,
     }, authenticationData) {
-      axios.post('http://localhost:3000/api/users/login', authenticationData)
+      axios.post('/api/users/login', authenticationData)
         .then(
           (result) => {
             commit(SET_AUTHENTICATION_TOKEN, result.data.id);
