@@ -10,6 +10,9 @@
     <v-content>
       <v-tabs show-arrows v-model="active" color="cyan" dark slider-color="yellow">
         <v-tab ripple>
+          Fill
+        </v-tab>
+        <v-tab ripple>
           Rainbow
         </v-tab>
         <v-tab ripple>
@@ -21,6 +24,11 @@
         <v-tab ripple>
           Wave
         </v-tab>
+        <v-tab-item>
+          <iro-mode>
+            <iro-fill-mode @sendToServer="sendToServer"></iro-fill-mode>
+          </iro-mode>
+        </v-tab-item>
         <v-tab-item>
           <iro-mode>
             <iro-rainbow-mode @sendToServer="sendToServer"></iro-rainbow-mode>
@@ -52,6 +60,7 @@ import axios from 'axios';
 import IroMode from '@/components/modes/IroMode.vue';
 import IroGaugeMode from '@/components/modes/IroGaugeMode.vue';
 import IroWaveMode from '@/components/modes/IroWaveMode.vue';
+import IroFillMode from '@/components/modes/IroFillMode.vue';
 import IroSetupMode from '@/components/modes/IroSetupMode.vue';
 import IroRainbowMode from '@/components/modes/IroRainbowMode.vue';
 import IroMenu from '@/views/IroMenu.vue';
@@ -66,6 +75,7 @@ export default {
     IroWaveMode,
     IroSetupMode,
     IroRainbowMode,
+    IroFillMode,
     IroMenu,
     IroMode,
   },
