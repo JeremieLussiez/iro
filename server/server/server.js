@@ -21,6 +21,10 @@ if (process.env.NODE_ENV === 'production') {
   console.log(options.cert);
   server = https.createServer(options, app);
   sslAvailable = true;
+  http.createServer((req, res) => {
+    res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
+    res.end();
+  }).listen(80);
 } else {
   server = http.createServer(app);
 }
