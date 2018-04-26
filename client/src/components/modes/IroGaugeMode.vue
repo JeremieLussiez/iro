@@ -24,6 +24,7 @@
     </v-card-actions>
   </v-card>
 </template>
+
 <script>
 import IroRing from '@/components/IroRing.vue';
 import IroColorPicker from '@/components/IroColorPicker.vue';
@@ -89,7 +90,7 @@ export default {
     send() {
       const params = {
         background: this.backgroundColor,
-        value: toPercentage(this.value),
+        value: toPercentage(this.value).toFixed(2),
         gradient: {
           end: this.gradientEnd,
           start: this.gradientStart,
@@ -105,6 +106,6 @@ export default {
 };
 
 function toPercentage(value) {
-  return value * 100 / 24;
+  return value / 24;
 }
 </script>
