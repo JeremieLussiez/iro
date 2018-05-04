@@ -7,7 +7,7 @@
     </v-toolbar>
     <v-content>
       <section>
-        <v-parallax src="assets/background-top.jpg" height="600">
+        <v-parallax src="assets/background-section.jpg" height="600">
           <v-layout
             column
             align-center

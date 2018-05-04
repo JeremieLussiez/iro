@@ -10,7 +10,7 @@ module.exports = app;
 
 let sslAvailable = false;
 if (process.env.NODE_ENV === 'production') {
-  console.log("Loading certificates");
+  console.log('Loading certificates');
   const options = {
     key: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/privkey1.pem').toString(),
     cert: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/cert1.pem').toString(),
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
   server = https.createServer(options, app);
   sslAvailable = true;
   http.createServer((req, res) => {
-    res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
+    res.writeHead(301, {'Location': 'https://' + req.headers['host'] + req.url});
     res.end();
   }).listen(80);
 } else {
