@@ -55,72 +55,72 @@
 </template>
 
 <script>
-import axios from 'axios';
+  import axios from 'axios';
 
-import {store} from "../store";
+  import { store } from "../store";
 
-import IroMode from '@/components/modes/IroMode.vue';
-import IroGaugeMode from '@/components/modes/IroGaugeMode.vue';
-import IroWaveMode from '@/components/modes/IroWaveMode.vue';
-import IroFillMode from '@/components/modes/IroFillMode.vue';
-import IroSetupMode from '@/components/modes/IroSetupMode.vue';
-import IroRainbowMode from '@/components/modes/IroRainbowMode.vue';
-import IroMenu from '@/views/IroMenu.vue';
+  import IroMode from '@/components/modes/IroMode.vue';
+  import IroGaugeMode from '@/components/modes/IroGaugeMode.vue';
+  import IroWaveMode from '@/components/modes/IroWaveMode.vue';
+  import IroFillMode from '@/components/modes/IroFillMode.vue';
+  import IroSetupMode from '@/components/modes/IroSetupMode.vue';
+  import IroRainbowMode from '@/components/modes/IroRainbowMode.vue';
+  import IroMenu from '@/views/IroMenu.vue';
 
-export default {
-  name: 'home',
-  props: {
-    source: String,
-  },
-  components: {
-    IroGaugeMode,
-    IroWaveMode,
-    IroSetupMode,
-    IroRainbowMode,
-    IroFillMode,
-    IroMenu,
-    IroMode,
-  },
-  data: () => ({
-    username: '',
-    drawer: null,
-    notifications: false,
-    sound: true,
-    widgets: false,
-    active: null,
-    text:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  }),
-  methods: {
-    next() {
-      const active = parseInt(this.active, 10);
-      this.active = (active < 2 ? active + 1 : 0).toString();
+  export default {
+    name: 'home',
+    props: {
+      source: String,
     },
-    sendToServer(modeName, modeParams = {}, messageParams = {}) {
-      console.log('sendToServer', modeName, modeParams);
-      const message = {
-        payload: {
-          type: modeName,
-          speed: 1,
-          duration: -1,
-          ...modeParams,
-        },
-        text: 'Hello iro!',
-        from: this.username,
-        to: 'IRO00001',
-        date: new Date(),
-        ...messageParams,
-      };
-      axios.post('/api/messages', message).then(
-        result => {},
-        error => {
-          console.log(error);
-        }
-      );
+    components: {
+      IroGaugeMode,
+      IroWaveMode,
+      IroSetupMode,
+      IroRainbowMode,
+      IroFillMode,
+      IroMenu,
+      IroMode,
     },
-  },
-  mounted() {
-    this.username = store.state.userData.username
-  }
-};
+    data: () => ({
+      username: '',
+      drawer: null,
+      notifications: false,
+      sound: true,
+      widgets: false,
+      active: null,
+      text:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+    }),
+    methods: {
+      next() {
+        const active = parseInt(this.active, 10);
+        this.active = (active < 2 ? active + 1 : 0).toString();
+      },
+      sendToServer(modeName, modeParams = {}, messageParams = {}) {
+        console.log('sendToServer', modeName, modeParams, messageParams);
+        const message = {
+          payload: {
+            type: modeName,
+            speed: 1,
+            duration: -1,
+            ...modeParams,
+          },
+          text: 'Hello iro!',
+          from: this.username,
+          date: new Date(),//todo dynamic date depending on chosen delay
+          ...messageParams,
+        };
+        axios.post('/api/messages', message).then(
+          result => {
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      },
+    },
+    mounted() {
+      this.username = store.state.userData.username
+    }
+  };
 </script>
