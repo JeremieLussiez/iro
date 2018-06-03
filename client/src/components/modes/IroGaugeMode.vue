@@ -76,7 +76,7 @@ export default {
             Color.htmlColorToRGB(this.gradientStart),
             0,
             Color.htmlColorToRGB(this.gradientEnd),
-            leds.length - 1,
+            this.value - 1,
             i
           )
         );
