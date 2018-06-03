@@ -21,6 +21,7 @@ export default {
     'login.screen.password': 'Password',
     'main.language': 'Language',
     'menu.logout': 'Log out',
+    'menu.greeting': 'Hello',
     'menu.home': 'Home',
     'wave.background': 'Background color',
     'wave.gradient.end': 'End color',

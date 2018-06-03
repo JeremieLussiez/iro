@@ -1,5 +1,5 @@
 const server = require('../server');
-const {admins} = require('../setup/admins');
+const { admins } = require('../setup/admins');
 const {
   gaugeMessage,
   rainbowMessage,
@@ -11,6 +11,24 @@ const {
 } = server.models;
 const User = server.models.user;
 const Message = server.models.message;
+
+
+User.afterRemote('login', function (ctx, instance, next) {
+  User
+    .findOne({
+      where: {
+        _id: instance.userId
+      }
+    })
+    .then(foundUser => {
+      ctx.result.userData = {
+        username: foundUser.username,
+        friendsIds: foundUser.friendsIds
+      };
+    })
+    .then(next);
+});
+
 
 Role.findOne({
   where: {

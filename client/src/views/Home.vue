@@ -5,7 +5,7 @@
     </v-navigation-drawer>
     <v-toolbar color="blue" dark fixed app>
       <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-      <v-toolbar-title>Iro client</v-toolbar-title>
+      <v-toolbar-title>__menu.greeting__, {{username}}</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <v-tabs show-arrows v-model="active" color="cyan" dark slider-color="yellow">
@@ -57,6 +57,8 @@
 <script>
 import axios from 'axios';
 
+import {store} from "../store";
+
 import IroMode from '@/components/modes/IroMode.vue';
 import IroGaugeMode from '@/components/modes/IroGaugeMode.vue';
 import IroWaveMode from '@/components/modes/IroWaveMode.vue';
@@ -80,6 +82,7 @@ export default {
     IroMode,
   },
   data: () => ({
+    username: '',
     drawer: null,
     notifications: false,
     sound: true,
@@ -93,19 +96,20 @@ export default {
       const active = parseInt(this.active, 10);
       this.active = (active < 2 ? active + 1 : 0).toString();
     },
-    sendToServer(modeName, modeParams = {}) {
+    sendToServer(modeName, modeParams = {}, messageParams = {}) {
       console.log('sendToServer', modeName, modeParams);
       const message = {
         payload: {
-          ...modeParams,
           type: modeName,
           speed: 1,
           duration: -1,
+          ...modeParams,
         },
-        text: 'I did it!!',
-        date: new Date(),
+        text: 'Hello iro!',
+        from: this.username,
         to: 'IRO00001',
-        from: 'Lootss',
+        date: new Date(),
+        ...messageParams,
       };
       axios.post('/api/messages', message).then(
         result => {},
@@ -115,5 +119,8 @@ export default {
       );
     },
   },
+  mounted() {
+    this.username = store.state.userData.username
+  }
 };
 </script>
