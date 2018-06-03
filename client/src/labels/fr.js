@@ -20,6 +20,8 @@ export default {
     'login.screen.login': 'Utilisateur',
     'login.screen.password': 'Mot de passe',
     'main.language': 'Langue',
+    'menu.logout': 'Déconnexion',
+    'menu.home': 'Accueil',
     'wave.background': 'Couleur de fond',
     'wave.gradient.end': 'Couleur finale',
     'wave.gradient.start': 'Couleur initiale',
