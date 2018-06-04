@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 200 200" width="256" height="256">
+  <circle cx="170" cy="90" r="10" fill="#ffffff"></circle>
+  <circle cx="167.27406610312545" cy="110.70552360820166" r="10" fill="#ffffff"></circle>
+  <circle cx="159.2820323027551" cy="130" r="10" fill="#ffffff"></circle>
+  <circle cx="146.5685424949238" cy="146.5685424949238" r="10" fill="#ffffff"></circle>
+  <circle cx="130" cy="159.28203230275508" r="10" fill="#ffffff"></circle>
+  <circle cx="110.70552360820167" cy="167.27406610312545" r="10" fill="#ffffff"></circle>
+  <circle cx="90" cy="170" r="10" fill="#ffffff"></circle>
+  <circle cx="69.29447639179836" cy="167.27406610312545" r="10" fill="#ffffff"></circle>
+  <circle cx="50.000000000000014" cy="159.2820323027551" r="10" fill="#ffffff"></circle>
+  <circle cx="33.4314575050762" cy="146.5685424949238" r="10" fill="#ffffff"></circle>
+  <circle cx="20.717967697244916" cy="130.00000000000003" r="10" fill="#ffffff"></circle>
+  <circle cx="12.725933896874551" cy="110.70552360820167" r="10" fill="#ffffff"></circle>
+  <circle cx="10" cy="90.00000000000001" r="10" fill="#ffffff"></circle>
+  <circle cx="12.725933896874523" cy="69.29447639179837" r="10" fill="#ffffff"></circle>
+  <circle cx="20.717967697244887" cy="50.00000000000002" r="10" fill="#ffffff"></circle>
+  <circle cx="33.43145750507617" cy="33.43145750507623" r="10" fill="#ffffff"></circle>
+  <circle cx="49.999999999999964" cy="20.717967697244916" r="10" fill="#ffffff"></circle>
+  <circle cx="69.29447639179827" cy="12.725933896874551" r="10" fill="#ffffff"></circle>
+  <circle cx="89.99999999999999" cy="10" r="10" fill="#ffffff"></circle>
+  <circle cx="110.70552360820162" cy="12.725933896874523" r="10" fill="#ffffff"></circle>
+  <circle cx="129.99999999999994" cy="20.717967697244873" r="10" fill="#ffffff"></circle>
+  <circle cx="146.5685424949238" cy="33.43145750507618" r="10" fill="#ffffff"></circle>
+  <circle cx="159.28203230275506" cy="49.999999999999964" r="10" fill="#ffffff"></circle>
+  <circle cx="167.27406610312545" cy="69.29447639179827" r="10" fill="#ffffff"></circle>
+  <text x="47.5" y="109" font-family="tahoma" font-size="50">
+    <tspan fill="#ffffff">I</tspan>
+  </text>
+  <text x="62.5" y="109" font-family="tahoma" font-size="50">
+    <tspan fill="#ffffff">R</tspan>
+  </text>
+  <text x="97.5" y="109" font-family="tahoma" font-size="50">
+    <tspan fill="#ffffff">O</tspan>
+  </text>
+</svg>

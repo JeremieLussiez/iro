@@ -1,4 +1,4 @@
-<svg width="400mm" height="400mm">
+<svg xmlns="http://www.w3.org/2000/svg" width="400mm" height="400mm">
     <!-- Socle leds-->
     <circle cx="44mm" cy="44mm" r="28mm" fill="transparent" stroke="black" stroke-width="0.2mm"/>
     <circle cx="44mm" cy="44mm" r="40mm" fill="transparent" stroke="black" stroke-width="0.2mm"/>

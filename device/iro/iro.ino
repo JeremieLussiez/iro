@@ -4,8 +4,10 @@
 #include <ESP8266WebServer.h>
 #include <ESP8266mDNS.h>
 #include <FS.h>
+#include <Ticker.h>
 
 #include "./configuration.h"
+#include "./color.h"
 #include "./iroModesManager.h"
 #include "./setupIroMode.h"
 #include "./ringIroMode.h"
@@ -15,6 +17,8 @@
 
 const char* ssid = "***";
 const char* password = "***";
+
+Ticker animationTimer;
 
 ESP8266WebServer server(80);
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIXELS_PIN, NEO_GRB + NEO_KHZ800);
@@ -142,10 +146,54 @@ void waitingToggle() {
 
 void setup(void) {
   pixels.begin();
+
   for (int i = 0; i < NUMPIXELS; i++) {
     pixels.setPixelColor(i, pixels.Color(0, 0, 0));
   }
   pixels.show();
+
+  String colors[] = {
+    "#F44336",
+    "#E91E63",
+    "#9C27B0",
+    "#673AB7",
+    "#3F51B5",
+    "#2196F3",
+    "#03A9F4",
+    "#00BCD4",
+    "#009688",
+    "#4CAF50",
+    "#8BC34A",
+    "#FFEB3B",
+    "#FFC107",
+    "#FF9800",
+    "#FF5722",
+    "#795548",
+    "#607D8B",
+    "#9E9E9E",
+    "#ffffff"
+  };
+
+  String rainbow[] = {
+    "#2196f3",
+    "#3f51b5",
+    "#9c27b0",
+    "#ff5722",
+    "#ffeb3b",
+    "#4baf4f"
+  };
+
+  for (int k = 0; k < 19; k++) {
+    int rgb[3];
+    hexToInt(colors[k], rgb);
+    for (int i = 0; i < NUMPIXELS; i++) {
+      pixels.setPixelColor(i, pixels.Color(rgb[0], rgb[1], rgb[2]));
+    }
+    pixels.show();
+    delay(2000);
+  }
+
+  animationTimer.attach(0.01, animate);
 
   WiFi.softAPdisconnect();
   WiFi.disconnect();
@@ -214,7 +262,10 @@ void setup(void) {
 }
 
 void loop(void) {
-  iroModesManager->animateModes();
   server.handleClient();
+}
+
+void animate() {
+  iroModesManager->animateModes();
 }
 

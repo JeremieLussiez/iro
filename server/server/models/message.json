@@ -1,0 +1,28 @@
+{
+  "name": "message",
+  "description": "A message. The server will make this message available to IROs.",
+  "plural": "messages",
+  "properties": {
+    "payload": {
+      "type": "object"
+    },
+    "text": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
+    },
+    "to": {
+      "type": "string"
+    },
+    "from": {
+      "type": "string"
+    },
+    "duration": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "acls": [],
+  "methods": {}
+}

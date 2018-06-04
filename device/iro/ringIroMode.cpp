@@ -2,17 +2,13 @@
 #include "./iroModesManager.h"
 
 void RingIroMode::animate(Adafruit_NeoPixel *pixels) {
-  if (this->loopDelay > LOOP_DELAY / 10) {
-    this->loopDelay = 0;
-    if (!(areSameColor(this->currentForegroundColor, this->targetForegroundColor))) {
-      this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor, 1);
-      for (int i = 0; i < NUMPIXELS; i++) {
-        pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
-      }
-      pixels->show();
+  if (!(areSameColor(this->currentForegroundColor, this->targetForegroundColor))) {
+    this->currentForegroundColor = lerpColor(this->currentForegroundColor, this->targetForegroundColor, 1);
+    for (int i = 0; i < NUMPIXELS; i++) {
+      pixels->setPixelColor(i, pixels->Color(this->currentForegroundColor.r, this->currentForegroundColor.g, this->currentForegroundColor.b));
     }
+    pixels->show();
   }
-  this->loopDelay++;
 }
 
 void RingIroMode::handleRoute() {

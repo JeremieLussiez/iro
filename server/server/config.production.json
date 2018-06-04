@@ -1,0 +1,22 @@
+{
+  "restApiRoot": "/api",
+  "host": "www.my-iro.com",
+  "port": 443,
+  "remoting": {
+    "context": false,
+    "rest": {
+      "handleErrors": false,
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "5mb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "10mb"
+    },
+    "cors": false
+  }
+}

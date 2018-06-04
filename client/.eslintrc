@@ -1,0 +1,25 @@
+{
+  "root": true,
+  "extends": [
+    "plugin:vue/essential",
+    "@vue/airbnb"
+  ],
+  "rules": {
+    "indent": "off",
+    "vue/script-indent": [
+      "error",
+      "space",
+      {
+        "baseIndent": 1
+      }
+    ],
+    "no-underscore-dangle": "off",
+    "no-bitwise": "off",
+    "no-plusplus": "off",
+    "max-len": "off"
+  },
+  "globals": {
+    "window": true,
+    "sessionStorage": true
+  }
+}

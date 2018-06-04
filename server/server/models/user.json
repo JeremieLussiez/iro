@@ -1,0 +1,45 @@
+{
+  "name": "user",
+  "description": "An user owns one or several IROs and can message friends.",
+  "plural": "users",
+  "base": "User",
+  "idInjection": true,
+  "properties": {
+    "firstName": {
+      "type": "string"
+    },
+    "lastName": {
+      "type": "string"
+    },
+    "birthday": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "iros": {
+      "type": "referencesMany",
+      "model": "iro",
+      "foreignKey": "irosIds"
+    },
+    "friends": {
+      "type": "referencesMany",
+      "model": "user",
+      "foreignKey": "friendsIds"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "WRITE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "iro": {
+    "host": "127.0.0.1",
+    "port": 27017,
+    "url": "",
+    "database": "iro",
+    "password": "",
+    "name": "iro",
+    "user": "",
+    "connector": "mongodb",
+    "allowExtendedOperators": true,
+    "enableGeoIndexing": true
+  }
+}

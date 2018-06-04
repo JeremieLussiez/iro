@@ -1,0 +1,29 @@
+version: "2"
+services:
+  app:
+    container_name: app
+    restart: always
+    build: ./server
+    ports:
+      - "80:3000"
+    links:
+      - iro-mongo
+    depends_on:
+      - iro-web
+      - iro-mongo
+    volumes:
+      - staticfiles:/var/www:rw
+  iro-mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - /var/data:/data/db
+  iro-web:
+    container_name: web
+    restart: always
+    build: ./client
+    volumes:
+      - staticfiles:/var/www:rw
+volumes:
+  staticfiles:
+    driver: local
