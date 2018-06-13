@@ -25,28 +25,28 @@
           Wave
         </v-tab>
         <v-tab-item>
-          <iro-mode>
-            <iro-fill-mode @sendToServer="sendToServer"></iro-fill-mode>
+          <iro-mode @sendToServer="sendToServer">
+            <iro-fill-mode></iro-fill-mode>
           </iro-mode>
         </v-tab-item>
         <v-tab-item>
-          <iro-mode>
-            <iro-rainbow-mode @sendToServer="sendToServer"></iro-rainbow-mode>
+          <iro-mode @sendToServer="sendToServer">
+            <iro-rainbow-mode></iro-rainbow-mode>
           </iro-mode>
         </v-tab-item>
         <v-tab-item>
-          <iro-mode>
-            <iro-setup-mode @sendToServer="sendToServer"></iro-setup-mode>
+          <iro-mode @sendToServer="sendToServer">
+            <iro-setup-mode></iro-setup-mode>
           </iro-mode>
         </v-tab-item>
         <v-tab-item>
-          <iro-mode>
-            <iro-gauge-mode @sendToServer="sendToServer"></iro-gauge-mode>
+          <iro-mode @sendToServer="sendToServer">
+            <iro-gauge-mode></iro-gauge-mode>
           </iro-mode>
         </v-tab-item>
         <v-tab-item>
-          <iro-mode>
-            <iro-wave-mode @sendToServer="sendToServer"></iro-wave-mode>
+          <iro-mode @sendToServer="sendToServer">
+            <iro-wave-mode></iro-wave-mode>
           </iro-mode>
         </v-tab-item>
       </v-tabs>
