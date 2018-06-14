@@ -21,7 +21,7 @@ const admins = [
     email: 'jeremie.lussiez@gmail.com',
     birthday: '1981-10-04T00:00:00.000Z',
     password: process.env.NODE_ENV === 'production' ? passwordGenerator(5) : 'iro',
-    irosIds: ['IRO00001'],
+    irosIds: ['IRO00001', 'IRO00002'],
   },
   {
     username: 'Lootss',
@@ -30,7 +30,7 @@ const admins = [
     email: 'lucille.dhaleine@gmail.com',
     birthday: '1991-12-06T00:00:00.000Z',
     password: process.env.NODE_ENV === 'production' ? passwordGenerator(5) : 'iro',
-    irosIds: ['IRO00002'],
+    irosIds: ['IRO00001', 'IRO00002'],
   },
 ];
 

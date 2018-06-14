@@ -10,15 +10,10 @@ module.exports = app;
 
 let sslAvailable = false;
 if (process.env.NODE_ENV === 'production') {
-  console.log('Loading certificates');
   const options = {
     key: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/privkey1.pem').toString(),
     cert: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/cert1.pem').toString(),
   };
-  console.log('KEY = ');
-  console.log(options.key);
-  console.log('CERT = ');
-  console.log(options.cert);
   server = https.createServer(options, app);
   sslAvailable = true;
   http.createServer((req, res) => {
