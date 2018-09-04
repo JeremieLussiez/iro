@@ -11,8 +11,8 @@ module.exports = app;
 let sslAvailable = false;
 if (process.env.NODE_ENV === 'production') {
   const options = {
-    key: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/privkey1.pem').toString(),
-    cert: fs.readFileSync('/etc/letsencrypt/archive/my-iro.com/cert1.pem').toString(),
+    key: fs.readFileSync('/etc/letsencrypt/archive/my-iro.app/privkey1.pem').toString(),
+    cert: fs.readFileSync('/etc/letsencrypt/archive/my-iro.app/cert1.pem').toString(),
   };
   server = https.createServer(options, app);
   sslAvailable = true;
